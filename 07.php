@@ -1,13 +1,51 @@
 <!-- 
-
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+What is the 10 001st prime number?
  -->
 <?php $startTime = microtime(true);
+//simple prime varifier
+function isPrime($input)
+{
+	$coin = 1;
+	for ($i=2; $i < ($input/($i-1)) ; $i++) {
+		if ($input%$i==0) {
+			$coin--;
+			break;
+		}
+	}
+	return $coin;
+}
+//large number prime varifier
+// function isPrime($input)
+// {
+// 	$bigCheck = ''+($input);
+// 	$coin = 1;
+// 	for ($i=2; $i < ($input/($i-1)) ; $i++) {
+// 		$check = ''+$i;
+// 		if (bcmod($bigCheck, $check)==0) {
+// 			$coin--;
+// 			break;
+// 		}
+// 	}
+// 	return $coin;
+// }
+
+$primeIndex = 0;
+$i=2;
+while ($primeIndex < 10001) {
+	if (isPrime($i)==1) {
+		$primeIndex++;
+		if ($primeIndex==10001) {
+			$AnswerPrime = $i;
+		}
+	}
+	$i++;
+}
 
 
 
 
-
-$answer = 0;
+$answer = $AnswerPrime;
 $endTime = microtime(true);
 echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
 ?>

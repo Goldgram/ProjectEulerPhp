@@ -3,15 +3,15 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
  -->
 <?php $startTime = microtime(true);
-//function to check if number is prime
-function prime($input)
+//large number prime varifier
+function isPrime($input)
 {
 	$bigCheck = ''+($input);
-	$coin = 0;
-	for ($i=2; $i < ($input) ; $i++) {
+	$coin = 1;
+	for ($i=2; $i < ($input/($i-1)) ; $i++) {
 		$check = ''+$i;
 		if (bcmod($bigCheck, $check)==0) {
-			$coin++;
+			$coin--;
 			break;
 		}
 	}
@@ -37,7 +37,7 @@ while (($bigNum/$div)>=$div) {
 //check the top half of factors
 $foundInTopHalf = 0;
 for ($i=0; $i < count($numbers); $i++) { 
-	if (prime($bigNum/$numbers[$i])==0)
+	if (isPrime($bigNum/$numbers[$i])==1)
 	{
 		$HighestPrime = $bigNum/$numbers[$i];
 		$foundInTopHalf++;
@@ -47,7 +47,7 @@ for ($i=0; $i < count($numbers); $i++) {
 //if not there check the bottom half
 if ($foundInTopHalf==0) {
 	for ($i=count($numbers)-1; $i >= 0; $i--) { 
-		if (prime($numbers[$i])==0)
+		if (isPrime($numbers[$i])==1)
 		{
 			$HighestPrime = $numbers[$i];
 			break;
