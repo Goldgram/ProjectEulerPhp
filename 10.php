@@ -14,8 +14,11 @@ for ($i=2; $i <= 10; $i++) {
 		// echo $key,' => ',$value,'<br>';
 	}
 }
+echo array_sum($numbers)
 
-$answer = array_sum($numbers);
+
+
+$answer = 'not finished';
 $endTime = microtime(true);
 echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
 ?>
