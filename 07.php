@@ -15,23 +15,10 @@ function isPrime($input)
 	}
 	return $coin;
 }
-//large number prime varifier
-// function isPrime($input)
-// {
-// 	$bigCheck = ''+($input);
-// 	$coin = 1;
-// 	for ($i=2; $i < ($input/($i-1)) ; $i++) {
-// 		$check = ''+$i;
-// 		if (bcmod($bigCheck, $check)==0) {
-// 			$coin--;
-// 			break;
-// 		}
-// 	}
-// 	return $coin;
-// }
 
 $primeIndex = 0;
 $i=2;
+// loop until the 10001 prime found
 while ($primeIndex < 10001) {
 	if (isPrime($i)==1) {
 		$primeIndex++;
@@ -41,9 +28,6 @@ while ($primeIndex < 10001) {
 	}
 	$i++;
 }
-
-
-
 
 $answer = $AnswerPrime;
 $endTime = microtime(true);
