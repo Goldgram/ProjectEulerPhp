@@ -4,7 +4,8 @@ What is the smallest positive number that is evenly divisible by all of the numb
  -->
 <?php $startTime = microtime(true);
 
-function LCM($a,$b)
+//Lowest Common factor of two numbers
+function LCF($a,$b)
 {
 	$HCDValue = 0;
 	for ($i = $b; $i >= 1; $i--) { 
@@ -13,9 +14,14 @@ function LCM($a,$b)
 			break;
 		}
 	}
-	return ($a*$b)/$HCDValue;
+	return $HCDValue;
 }
-
+//lowest common multiple of two numbers
+function LCM($a,$b)
+{
+	return ($a*$b)/LCF($a*$b);
+}
+// looping values 2-20
 $CurrentNum = 2;
 for ($i=3; $i < 21; $i++) { 
 	$CurrentNum = LCM($CurrentNum,$i);
