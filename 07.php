@@ -7,7 +7,8 @@ What is the 10 001st prime number?
 function isPrime($input)
 {
 	$coin = 1;
-	for ($i=2; $i < ($input/($i-1)) ; $i++) {
+	$sq = sqrt($input);
+	for ($i=2; $i < $sq; $i++) {
 		if ($input%$i==0) {
 			$coin--;
 			break;

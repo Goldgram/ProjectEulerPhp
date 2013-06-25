@@ -6,11 +6,10 @@ What is the largest prime factor of the number 600851475143 ?
 //large number prime varifier
 function isPrime($input)
 {
-	$bigCheck = ''+($input);
 	$coin = 1;
-	for ($i=2; $i < ($input/($i-1)) ; $i++) {
-		$check = ''+$i;
-		if (bcmod($bigCheck, $check)==0) {
+	$sq = sqrt($input);
+	for ($i=2; $i < $sq ; $i++) {
+		if (fmod($input, $i)==0) {
 			$coin--;
 			break;
 		}

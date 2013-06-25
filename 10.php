@@ -1,12 +1,11 @@
 <?php $startTime = microtime(true);
 
-function isPrime($input,$inputArray)
+function isPrime($input)
 {
-	$bigCheck = ''+($input);
 	$coin = 1;
-	for ($i=0; $i < count($inputArray); $i++) {
-		$check = ''+$inputArray[$i];
-		if (bcmod($bigCheck, $check)==0) {
+	$sq = sqrt($input);
+	for ($i=2; $i < $sq; $i++) {
+		if (fmod($input,$i)==0) {
 			$coin--;
 			break;
 		}
@@ -29,19 +28,13 @@ function isPrime($input,$inputArray)
 // 	}
 // }
 // echo array_sum($numbers),'<br>';
-$totalPrimes = 0;
-$primeArray = array();
-$primeArray[0] = 2;
-$primeArrayIndex = 1;
-for ($i=3; $i <= 4000000; $i++) {
-	if (isPrime($i,$primeArray)==1)
+$totalPrimes = 2;
+for ($i=3; $i < 2000000; $i+=2) {
+	if (isPrime($i)==1)
 	{
-		$primeArray[$primeArrayIndex] = $i;
-		$primeArrayIndex++;
+		//echo $i;
 		$totalPrimes += $i; 
 	}
-	var_dump($primeArray);
-	echo '<br><br>';
 }
 
 
