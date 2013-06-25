@@ -4,11 +4,27 @@ What is the smallest positive number that is evenly divisible by all of the numb
  -->
 <?php $startTime = microtime(true);
 
+function LCM($a,$b)
+{
+	$HCDValue = 0;
+	for ($i = $b; $i >= 1; $i--) { 
+		if ($a%$i==0 && $b%$i==0) {
+			$HCDValue = $i;
+			break;
+		}
+	}
+	return ($a*$b)/$HCDValue;
+}
+
+$CurrentNum = 2;
+for ($i=3; $i < 21; $i++) { 
+	$CurrentNum = LCM($CurrentNum,$i);
+}
 
 
 
 
-$answer = 0;
+$answer = $CurrentNum;
 $endTime = microtime(true);
 echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
 ?>
