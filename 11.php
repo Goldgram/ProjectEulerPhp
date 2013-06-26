@@ -47,7 +47,7 @@ $grid[18] = array(20,73,35,29,78,31,90,1,74,31,49,71,48,86,81,16,23,57,5,54);
 $grid[19] = array(01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48);
 
 $highestProd = 0;
-// loop horizontal first
+// loop horizontal 
 for ($i=0; $i < 20; $i++) { 
 	for ($j=0; $j < 16; $j++) {
 		$currentProd = 1;
@@ -58,7 +58,44 @@ for ($i=0; $i < 20; $i++) {
 			$highestProd = $currentProd;
 		}
 	}
+}
+// loop virtical
+for ($i=0; $i < 16; $i++) { 
+	for ($j=0; $j < 20; $j++) {
+		$currentProd = 1;
+		for ($k=0; $k < 4; $k++) { 
+			$currentProd *= $grid[$i+$k][$j];
+		}
+		if ($currentProd>$highestProd) {
+			$highestProd = $currentProd;
+		}
+	}
+}
 
+// loop diagonally
+for ($i=0; $i < 16; $i++) { 
+	for ($j=0; $j < 16; $j++) {
+		$currentProd = 1;
+		for ($k=0; $k < 4; $k++) { 
+			$currentProd *= $grid[$i+$k][$j+$k];
+		}
+		if ($currentProd>$highestProd) {
+			$highestProd = $currentProd;
+		}
+	}
+}
+
+// loop diagonally backward
+for ($i=3; $i < 20; $i++) { 
+	for ($j=3; $j < 20; $j++) {
+		$currentProd = 1;
+		for ($k=0; $k < 4; $k++) { 
+			$currentProd *= $grid[$i-$k][$j+$k];
+		}
+		if ($currentProd>$highestProd) {
+			$highestProd = $currentProd;
+		}
+	}
 }
 
 
