@@ -65,25 +65,24 @@ for ($i=0; $i < 20; $i++) {
 		}
 	}
 }
-// for ($i=0; $i < 17; $i++) { 
-// 	for ($j=0; $j < 17; $j++) {
-// 		$iplus = $i+3;
-// 		$jplus = $j+3;
-// 		$currentProd1 = $currentProd2 = 1;
-// 		for ($k=0; $k < 4; $k++) {
-// 			// loop horizontal
-// 			$currentProd1 *= $grid[$i+$k][$j+$k];
-// 			// loop vertical
-// 			$currentProd2 *= $grid[$iplus-$k][$jplus+$k];
-// 		}
-// 		if ($currentProd1>$highestProd) {
-// 			$highestProd = $currentProd1;
-// 		}
-// 		if ($currentProd2>$highestProd) {
-// 			$highestProd = $currentProd2;
-// 		}
-// 	}
-// }
+for ($i=0; $i < 17; $i++) { 
+	for ($j=0; $j < 17; $j++) {
+		$iplus = $i+3;
+		$currentProd1 = $currentProd2 = 1;
+		for ($k=0; $k < 4; $k++) {
+			// loop diagonal
+			$currentProd1 *= $grid[$i+$k][$j+$k];
+			// loop diagonal backward
+			$currentProd2 *= $grid[$iplus-$k][$j+$k];
+		}
+		if ($currentProd1>$highestProd) {
+			$highestProd = $currentProd1;
+		}
+		if ($currentProd2>$highestProd) {
+			$highestProd = $currentProd2;
+		}
+	}
+}
 
 
 $answer = $highestProd;
