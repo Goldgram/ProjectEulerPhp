@@ -24,6 +24,7 @@ The product of these numbers is 26  63  78  14 = 1788696.
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 2020 grid?
  -->
 <?php $startTime = microtime(true);
+
 $grid = array();
 $grid[0] = array(18,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8);
 $grid[1] = array(49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,4,56,62,0);
@@ -47,57 +48,45 @@ $grid[18] = array(20,73,35,29,78,31,90,1,74,31,49,71,48,86,81,16,23,57,5,54);
 $grid[19] = array(01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48);
 
 $highestProd = 0;
-// loop horizontal 
+
 for ($i=0; $i < 20; $i++) { 
-	for ($j=0; $j < 16; $j++) {
-		$currentProd = 1;
-		for ($k=0; $k < 4; $k++) { 
-			$currentProd *= $grid[$i][$j+$k];
+	for ($j=0; $j < 17; $j++) {
+		$currentProd1 = $currentProd2 = 1;
+		for ($k=0; $k < 4; $k++) {
+			// loop horizontal 
+			$currentProd1 *= $grid[$i][$j+$k];
+			// loop virtical
+			$currentProd2 *= $grid[$j][$i+$k];
 		}
-		if ($currentProd>$highestProd) {
-			$highestProd = $currentProd;
+		if ($currentProd1>$highestProd) {
+			$highestProd = $currentProd1;
 		}
-	}
-}
-// loop virtical
-for ($i=0; $i < 16; $i++) { 
-	for ($j=0; $j < 20; $j++) {
-		$currentProd = 1;
-		for ($k=0; $k < 4; $k++) { 
-			$currentProd *= $grid[$i+$k][$j];
-		}
-		if ($currentProd>$highestProd) {
-			$highestProd = $currentProd;
+		if ($currentProd2>$highestProd) {
+			$highestProd = $currentProd2;
 		}
 	}
 }
-
 // loop diagonally
-for ($i=0; $i < 16; $i++) { 
-	for ($j=0; $j < 16; $j++) {
-		$currentProd = 1;
-		for ($k=0; $k < 4; $k++) { 
-			$currentProd *= $grid[$i+$k][$j+$k];
+for ($i=0; $i < 17; $i++) { 
+	for ($j=0; $j < 17; $j++) {
+		$iplus = $i+3;
+		$jplus = $j+3;
+		$currentProd1 = $currentProd2 = 1;
+		for ($k=0; $k < 4; $k++) {
+			// loop diagonally
+			$currentProd1 *= $grid[$i+$k][$j+$k];
+			// loop diagonally backward
+			$currentProd2 *= $grid[$iplus-$k][$jplus+$k];
 		}
-		if ($currentProd>$highestProd) {
-			$highestProd = $currentProd;
+		if ($currentProd1>$highestProd) {
+			$highestProd = $currentProd1;
 		}
+		if ($currentProd2>$highestProd) {
+			$highestProd = $currentProd2;
+		}
+		
 	}
 }
-
-// loop diagonally backward
-for ($i=3; $i < 20; $i++) { 
-	for ($j=3; $j < 20; $j++) {
-		$currentProd = 1;
-		for ($k=0; $k < 4; $k++) { 
-			$currentProd *= $grid[$i-$k][$j+$k];
-		}
-		if ($currentProd>$highestProd) {
-			$highestProd = $currentProd;
-		}
-	}
-}
-
 
 $answer = $highestProd;
 $endTime = microtime(true);
