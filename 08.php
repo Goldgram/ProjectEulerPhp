@@ -37,5 +37,5 @@ for ($i=0; $i < strlen($numStr)-4; $i++) {
 
 $answer = $highestProd;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
+echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
 ?>

@@ -13,5 +13,5 @@ for ($i=1; $i < 1000; $i++) {
 
 $answer = $total;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
+echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
 ?>

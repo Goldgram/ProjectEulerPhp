@@ -27,10 +27,7 @@ for ($i=3; $i < 21; $i++) {
 	$CurrentNum = LCM($CurrentNum,$i);
 }
 
-
-
-
 $answer = $CurrentNum;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
+echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
 ?>

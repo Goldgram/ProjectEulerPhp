@@ -32,5 +32,5 @@ while ($primeIndex < 10001) {
 
 $answer = $AnswerPrime;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
+echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
 ?>

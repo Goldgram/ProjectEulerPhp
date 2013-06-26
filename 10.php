@@ -2,43 +2,61 @@
 
 function isPrime($input)
 {
-	$coin = 1;
 	$sq = sqrt($input);
-	for ($i=2; $i < $sq; $i++) {
-		if (fmod($input,$i)==0) {
-			$coin--;
-			break;
+	for ($i=2; $i <= $sq; $i++) {
+		if ($input%$i==0) {
+			return false;
 		}
 	}
-	return $coin;
+	return true;
 }
 
-// $numbers = array();
-// for ($i=2; $i <= 10; $i++) { 
-// 	$numbers[$i] = $i;
-// }
 
-// for ($i=2; $i <= 10; $i++) { 
-// 	//echo $i,'<br>';
-// 	foreach ($numbers as $key => $value) {
-// 		if ($value%$i==0 && $value!=$i) {
-// 			unset($numbers[$key]);
-// 		}
-// 		// echo $key,' => ',$value,'<br>';
+$totalPrimes = 2+3+5+7;
+
+//incrementing by 2
+// for ($num=11; $num < 2000000; $num+=2) { 
+// 	if (isPrime($num))
+// 	{
+// 		$totalPrimes += $num;
 // 	}
 // }
-// echo array_sum($numbers),'<br>';
-$totalPrimes = 2;
-for ($i=3; $i < 2000000; $i+=2) {
-	if (isPrime($i)==1)
+
+//incmenting by 10 and checking _1,_3,_7,_9 of numbers
+for ($num=11; $num < 2000000; $num+=10) { 
+	if (isPrime($num))
 	{
-		//echo $i;
-		$totalPrimes += $i; 
+		$totalPrimes += $num;
+	}
+	if (isPrime($num+2))
+	{
+		$totalPrimes += $num+2;
+	}
+	if (isPrime($num+6))
+	{
+		$totalPrimes += $num+6;
+	}
+	if (isPrime($num+8))
+	{
+		$totalPrimes += $num+8;
 	}
 }
+
+//incmenting by 2 and checking _1,_3,_7,_9 of numbers (skipping _5 with an if)
+// $num=11;
+// while ($num < 2000000) {
+// 	if (isPrime($num))
+// 	{
+// 		$totalPrimes += $num;
+// 	}
+// 	if (substr($num, -1)=="3") {
+// 		$num+=2;
+// 	}
+// 	$num+=2;
+// }
 
 
 $answer = $totalPrimes;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
+echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
 ?>

@@ -21,5 +21,5 @@ for ($a=1; $a <= 998; $a++) {
 
 $answer = $triplet;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,'<br>Time: ',($endTime - $startTime);
+echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
 ?>
