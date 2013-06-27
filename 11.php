@@ -66,7 +66,7 @@ for ($i=0; $i < 20; $i++) {
 		}
 	}
 }
-// loop diagonally
+
 for ($i=0; $i < 17; $i++) { 
 	for ($j=0; $j < 17; $j++) {
 		$iplus = $i+3;
@@ -84,7 +84,6 @@ for ($i=0; $i < 17; $i++) {
 		if ($currentProd2>$highestProd) {
 			$highestProd = $currentProd2;
 		}
-		
 	}
 }
 
