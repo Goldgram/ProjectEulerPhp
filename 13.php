@@ -208,17 +208,31 @@ $nums = array(
 
 
 
-$sumStr = "00000000000000000000000000000000000000000000000000";
+$sumStr = "0000000000000000000000000000000000000000000000000";
 // echo strlen($sumStr);
-//for ($i=0; $i < 100; $i++) {
-	for ($j=0; $j <= strlen($nums[0]); $j++) { 
+for ($i=0; $i < 100; $i++) {
+	$leftover = 0;
+	for ($j=1; $j <= strlen($nums[0]); $j++) { 
 
+		$current = intval(substr($sumStr,strlen($sumStr)-$j,1))+intval(substr($nums[$i],strlen($nums[$i])-$j,1))+$leftover;
+		$leftover=0;
+		echo substr($sumStr,strlen($sumStr)-$j,1)," + ",substr($nums[$i],strlen($nums[$i])-$j,1)," = ",(intval(substr($sumStr,strlen($sumStr)-$j,1))+intval(substr($nums[$i],strlen($nums[$i])-$j,1)))," => ",(intval(substr($sumStr,strlen($sumStr)-$j,1))+intval(substr($nums[$i],strlen($nums[$i])-$j,1))+$leftover),"\n";
+		if ($current>9) {
+			$current-=10;
+			$leftover=1;
+		}
+		if (isset($sumStr[strlen($sumStr)-$j])) {
+			$sumStr[strlen($sumStr)-$j] = $current;
+		}
+		else
+		{
+			$sumStr = "".$leftover.$current.$sumStr;
+		}
 		
-		echo substr($nums[98],strlen($nums[98])-$j,1)," + ",substr($nums[99],strlen($nums[99])-$j,1)," = ",(intval(substr($nums[98],strlen($nums[98])-$j,1))+intval(substr($nums[99],strlen($nums[99])-$j,1))),"\n";
-		
+
+		echo $sumStr,"\n";
 	}
-	//echo $nums[$i],"\n";
-//}
+}
 
 
 $answer = 0;
