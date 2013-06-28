@@ -207,35 +207,31 @@ $nums = array(
 );
 
 
-
-$sumStr = "0000000000000000000000000000000000000000000000000";
-// echo strlen($sumStr);
+//exactly 50 digit extra string
+$sumStr = "00000000000000000000000000000000000000000000000000";
+$extraint = 0;
 for ($i=0; $i < 100; $i++) {
+	// loop all digits in the string, leaving leftover for next loop where needed
 	$leftover = 0;
-	for ($j=1; $j <= strlen($nums[0]); $j++) { 
-
-		$current = intval(substr($sumStr,strlen($sumStr)-$j,1))+intval(substr($nums[$i],strlen($nums[$i])-$j,1))+$leftover;
+	for ($j=1; $j <= 50; $j++) { 
+		$current = intval(substr($sumStr,50-$j,1))+intval(substr($nums[$i],50-$j,1))+$leftover;
 		$leftover=0;
-		echo substr($sumStr,strlen($sumStr)-$j,1)," + ",substr($nums[$i],strlen($nums[$i])-$j,1)," = ",(intval(substr($sumStr,strlen($sumStr)-$j,1))+intval(substr($nums[$i],strlen($nums[$i])-$j,1)))," => ",(intval(substr($sumStr,strlen($sumStr)-$j,1))+intval(substr($nums[$i],strlen($nums[$i])-$j,1))+$leftover),"\n";
 		if ($current>9) {
 			$current-=10;
 			$leftover=1;
 		}
-		if (isset($sumStr[strlen($sumStr)-$j])) {
-			$sumStr[strlen($sumStr)-$j] = $current;
-		}
-		else
-		{
-			$sumStr = "".$leftover.$current.$sumStr;
-		}
-		
-
-		echo $sumStr,"\n";
+		$sumStr[50-$j] = $current;
+	}
+	// if any leftover outside the bounts of the string, put it into an array
+	if ($leftover>0) {
+		$extraint++;
 	}
 }
+//put the array int at the start and then substring for the first 10
+$sumStr = $extraint . $sumStr;
+$first10 = substr($sumStr,0,10);
 
-
-$answer = 0;
+$answer = $first10;
 $endTime = microtime(true);
 echo 'Answer: ',$answer," <br>\n Time: ",($endTime - $startTime),' ';
 ?>
