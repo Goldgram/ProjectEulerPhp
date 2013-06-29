@@ -4,7 +4,7 @@ Starting in the top left corner of a 22 grid, and only being able to move to the
 How many such routes are there through a 2020 grid?
  -->
 <?php $startTime = microtime(true);
-
+// solves any grid size
 $gridSize = 20;
 $numArray = array();
 for ($i=0; $i < $gridSize*2; $i++) { 
