@@ -89,5 +89,4 @@ for ($i=0; $i < 17; $i++) {
 
 $answer = $highestProd;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
-?>
+echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";

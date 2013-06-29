@@ -42,5 +42,4 @@ while ($total >= 0) {
 
 $answer = $numberOfDivPlus500;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
-?>
+echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";

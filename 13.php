@@ -233,5 +233,4 @@ $first10 = substr($sumStr,0,10);
 
 $answer = $first10;
 $endTime = microtime(true);
-echo 'Answer: ',$answer," <br>\n Time: ",($endTime - $startTime),' ';
-?>
+echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";

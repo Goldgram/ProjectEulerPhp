@@ -56,5 +56,4 @@ if ($foundInTopHalf==0) {
 
 $answer = $numbers[$i];
 $endTime = microtime(true);
-echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
-?>
+echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";

@@ -7,5 +7,4 @@
 
 $answer = 0;
 $endTime = microtime(true);
-echo 'Answer: ',$answer," <br>\n Time: ",($endTime - $startTime),' ';
-?>
+echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";

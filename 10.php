@@ -58,5 +58,4 @@ for ($num=11; $num < 2000000; $num+=10) {
 
 $answer = $totalPrimes;
 $endTime = microtime(true);
-echo 'Answer: ',$answer,' <br> Time: ',($endTime - $startTime),' ';
-?>
+echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";

@@ -42,5 +42,4 @@ for ($i=2; $i < 1000000; $i++) {
 
 $answer = $topNum;
 $endTime = microtime(true);
-echo 'Answer: ',$answer," <br>\n Time: ",($endTime - $startTime),' ';
-?>
+echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
