@@ -17,3 +17,5 @@ while ($a <= 4000000) {
 $answer = $total;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 4613732
+// Time:  0.00001s
