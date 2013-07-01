@@ -31,3 +31,5 @@ for ($i=$highest; $i >= $lowest; $i--) {
 $answer = $HighestPal;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 906609
+// Time: 0.0652s
