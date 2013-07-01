@@ -57,3 +57,5 @@ if ($foundInTopHalf==0) {
 $answer = $numbers[$i];
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 6857
+// Time: 2.7388s
