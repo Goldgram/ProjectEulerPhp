@@ -33,3 +33,5 @@ while ($primeIndex < 10001) {
 $answer = $AnswerPrime;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 104009
+// Time: 0.242s
