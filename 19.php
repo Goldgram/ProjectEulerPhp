@@ -48,3 +48,5 @@ for ($year=1900; $year < 2001; $year++) {
 $answer = $count;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 171
+// Time: 0.0002s
