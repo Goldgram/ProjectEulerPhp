@@ -6,41 +6,42 @@ Find the sum of the digits in the number 100!
  -->
 <?php $startTime = microtime(true);
 
-$numArray = array();
 $numArray[0] = 1;
-for ($i=10; $i > 0; $i--) {
-	echo $i,"\n";
-	// $leftover = 0;
+for ($i=100; $i > 0; $i--) {
 	for ($j=count($numArray)-1; $j >= 0; $j--) {
 		$tempNum = $numArray[$j]*$i;
 		$numArray[$j] = $tempNum%10;
-	// 	$numArray[$j] = ($numArray[$j]*2)+$leftover;
-	// 	if ($numArray[$j]>9) {
-	// 		$numArray[$j]-=10;
-	// 		$leftover = 1;
+		$decNum = "".$tempNum;
+		$numLength = strlen($decNum);
+		$leftover = 0;
+		for ($k=1; $k < $numLength; $k++) {
+			if (!isset($numArray[$j+$k])) {
+				$numArray[$j+$k] = 0;
+			}
+			$numArray[$j+$k] += intval($decNum[($numLength-1-$k)]);
+			$numArray[$j+$k] += $leftover;
 
-		//$decNum = (intval($belowOneHun/10)) * 10
-		$decNum = intval($tempNum/10);
-
-		// for ($i=0; $i < cou$numArray; $i++) { 
-		// 	# code...
-		// }
-
-
-
-		if (!isset($numArray[$j+1])) {
-			$numArray[$j+1] = 0;
+			if ($numArray[$j+$k]>9) {
+				$numArray[$j+$k]-=10;
+				$leftover = 1;
+			}
+			else
+			{
+				$leftover = 0;
+			}
+			if ($k==$numLength-1 && $leftover ==1) {
+				if (!isset($numArray[$j+$k+1])) {
+					$numArray[$j+$k+1] = 0;
+				}
+				$numArray[$j+$k+1] += 1;
+			}
 		}
-		$numArray[$j+1] += $decNum;
-	// 	}
-	// 	else
-	// 	{
-	// 		$leftover = 0;
-	// 	}
 	}
 }
-// $sumOfArray = array_sum($numArray);
+$sumOfArray = array_sum($numArray);
 
-$answer = 0;
+$answer = $sumOfArray;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 648
+// Time: 0.0145s
