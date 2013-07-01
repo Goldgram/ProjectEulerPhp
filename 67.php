@@ -241,3 +241,5 @@ for ($i=0; $i < count($sumTri[99]); $i++) {
 $answer = $maxSum;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 7273
+// Time: 0.012s
