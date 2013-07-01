@@ -11,9 +11,7 @@ function isPrime($input)
 	return true;
 }
 
-
 $totalPrimes = 2+3+5+7;
-
 //incrementing by 2
 // for ($num=11; $num < 2000000; $num+=2) { 
 // 	if (isPrime($num))
@@ -21,7 +19,6 @@ $totalPrimes = 2+3+5+7;
 // 		$totalPrimes += $num;
 // 	}
 // }
-
 //incmenting by 10 and checking _1,_3,_7,_9 of numbers
 for ($num=11; $num < 2000000; $num+=10) { 
 	if (isPrime($num))
@@ -41,7 +38,6 @@ for ($num=11; $num < 2000000; $num+=10) {
 		$totalPrimes += $num+8;
 	}
 }
-
 //incmenting by 2 and checking _1,_3,_7,_9 of numbers (skipping _5 with an if)
 // $num=11;
 // while ($num < 2000000) {
@@ -55,7 +51,8 @@ for ($num=11; $num < 2000000; $num+=10) {
 // 	$num+=2;
 // }
 
-
 $answer = $totalPrimes;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 142913828922
+// Time: 10.93s
