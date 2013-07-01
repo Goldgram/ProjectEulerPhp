@@ -14,3 +14,5 @@ for ($i=1; $i < 1000; $i++) {
 $answer = $total;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 233168
+// Time: 0.0001s
