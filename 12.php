@@ -28,7 +28,6 @@ function numDivisors($int)
 	}
 	return $divCount;
 }
-
 $total = 0;
 $add = 1;
 while ($total >= 0) {
@@ -43,3 +42,5 @@ while ($total >= 0) {
 $answer = $numberOfDivPlus500;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 76576500
+// Time:3.834s
