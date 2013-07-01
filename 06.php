@@ -18,3 +18,5 @@ $difference = ($SqSum*$SqSum) - $SumSq;
 $answer = $difference;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 25164150
+// Time: 0.00002s
