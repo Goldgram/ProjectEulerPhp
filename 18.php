@@ -41,15 +41,12 @@ $tri[11] = array(70,11,33,28,77,73,17,78,39,68,17,57);
 $tri[12] = array(91,71,52,38,17,14,91,43,58,50,27,29,48);
 $tri[13] = array(63,66,4,68,89,53,67,30,73,16,69,87,40,31);
 $tri[14] = array(04,62,98,27,23,9,70,98,73,93,38,53,60,4,23);
-
 $sumTri[0] = array(75);
-
 for ($i=1; $i <= 14; $i++) {
 	for ($j=0; $j < ($i+1); $j++) { 
 		$sumTri[$i][$j] = 0;
 	}
 }
-
 for ($i=0; $i < 14; $i++) {
 	for ($j=0; $j < count($tri[$i]); $j++) { 
 		$tempsum1 = $sumTri[$i][$j] + $tri[$i+1][$j];
@@ -73,3 +70,5 @@ for ($i=0; $i < count($sumTri[14]); $i++) {
 $answer = $maxSum;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 1074
+// Time: 0.048s
