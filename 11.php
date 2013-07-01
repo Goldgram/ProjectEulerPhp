@@ -46,9 +46,7 @@ $grid[16] = array(04,42,16,73,38,25,39,11,24,94,72,18,8,46,29,32,40,62,76,36);
 $grid[17] = array(20,69,36,41,72,30,23,88,34,62,99,69,82,67,59,85,74,4,36,16);
 $grid[18] = array(20,73,35,29,78,31,90,1,74,31,49,71,48,86,81,16,23,57,5,54);
 $grid[19] = array(01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48);
-
 $highestProd = 0;
-
 for ($i=0; $i < 20; $i++) { 
 	for ($j=0; $j < 17; $j++) {
 		$currentProd1 = $currentProd2 = 1;
@@ -56,7 +54,7 @@ for ($i=0; $i < 20; $i++) {
 			// loop horizontal 
 			$currentProd1 *= $grid[$i][$j+$k];
 			// loop virtical
-			$currentProd2 *= $grid[$j][$i+$k];
+			$currentProd2 *= $grid[$j+$k][$i];
 		}
 		if ($currentProd1>$highestProd) {
 			$highestProd = $currentProd1;
@@ -66,17 +64,15 @@ for ($i=0; $i < 20; $i++) {
 		}
 	}
 }
-
 for ($i=0; $i < 17; $i++) { 
 	for ($j=0; $j < 17; $j++) {
 		$iplus = $i+3;
-		$jplus = $j+3;
 		$currentProd1 = $currentProd2 = 1;
 		for ($k=0; $k < 4; $k++) {
 			// loop diagonally
 			$currentProd1 *= $grid[$i+$k][$j+$k];
 			// loop diagonally backward
-			$currentProd2 *= $grid[$iplus-$k][$jplus+$k];
+			$currentProd2 *= $grid[$iplus-$k][$j+$k];
 		}
 		if ($currentProd1>$highestProd) {
 			$highestProd = $currentProd1;
@@ -84,9 +80,12 @@ for ($i=0; $i < 17; $i++) {
 		if ($currentProd2>$highestProd) {
 			$highestProd = $currentProd2;
 		}
+		
 	}
 }
 
 $answer = $highestProd;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 70600674
+// Time: 0.0008s
