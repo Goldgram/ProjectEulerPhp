@@ -11,20 +11,33 @@ $numArray[0] = 1;
 for ($i=10; $i > 0; $i--) {
 	echo $i,"\n";
 	// $leftover = 0;
-	// for ($j=0; $j < count($numArray); $j++) { 
+	for ($j=count($numArray)-1; $j >= 0; $j--) {
+		$tempNum = $numArray[$j]*$i;
+		$numArray[$j] = $tempNum%10;
 	// 	$numArray[$j] = ($numArray[$j]*2)+$leftover;
 	// 	if ($numArray[$j]>9) {
 	// 		$numArray[$j]-=10;
 	// 		$leftover = 1;
-	// 		if (!isset($numArray[$j+1])) {
-	// 			$numArray[$j+1] = 0;
-	// 		}
+
+		//$decNum = (intval($belowOneHun/10)) * 10
+		$decNum = intval($tempNum/10);
+
+		// for ($i=0; $i < cou$numArray; $i++) { 
+		// 	# code...
+		// }
+
+
+
+		if (!isset($numArray[$j+1])) {
+			$numArray[$j+1] = 0;
+		}
+		$numArray[$j+1] += $decNum;
 	// 	}
 	// 	else
 	// 	{
 	// 		$leftover = 0;
 	// 	}
-	// }
+	}
 }
 // $sumOfArray = array_sum($numArray);
 
