@@ -45,7 +45,6 @@ $valsArray[800] = 12;//"eighthundred"
 $valsArray[900] = 11;//"ninehundred"
 $valsArray[1000] = 11;//"onethousand"
 $valsArray['and'] = 3;//"and"
-
 $thisTotal = 0;
 for ($i=1; $i <= 999; $i++) {
 	$thisTotal += $valsArray[intval($i/100) * 100];
@@ -67,3 +66,5 @@ $thisTotal += $valsArray[1000];
 $answer = $thisTotal;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 21124
+// Time: 0.0008s
