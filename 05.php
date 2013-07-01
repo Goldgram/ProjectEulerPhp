@@ -19,7 +19,7 @@ function LCF($a,$b)
 //lowest common multiple of two numbers
 function LCM($a,$b)
 {
-	return ($a*$b)/LCF($a*$b);
+	return ($a*$b)/LCF($a,$b);
 }
 // looping values 2-20
 $CurrentNum = 2;
@@ -30,3 +30,5 @@ for ($i=3; $i < 21; $i++) {
 $answer = $CurrentNum;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 232792560
+// Time: 0.00004s
