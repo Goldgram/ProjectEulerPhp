@@ -22,3 +22,5 @@ for ($a=1; $a <= 998; $a++) {
 $answer = $triplet;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 31875000
+// Time: 8.77s
