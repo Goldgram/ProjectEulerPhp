@@ -234,3 +234,5 @@ $first10 = substr($sumStr,0,10);
 $answer = $first10;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 5537376230
+// Time: 0.0075s
