@@ -28,3 +28,5 @@ $sumOfArray = array_sum($numArray);
 $answer = $sumOfArray;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 1366
+// Time: 0.0578s
