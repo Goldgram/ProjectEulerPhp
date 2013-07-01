@@ -38,3 +38,5 @@ for ($i=0; $i < strlen($numStr)-4; $i++) {
 $answer = $highestProd;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 40824
+// Time: 0.018s
