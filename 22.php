@@ -34,6 +34,11 @@ $letters["X"] = 24;
 $letters["Y"] = 25;
 $letters["Z"] = 26;
 
+
+
+// $numArray[0] = 0;
+
+
 sort($names);
 foreach ($names as $key => $val) {
   $letterTotal = 0;
@@ -42,6 +47,26 @@ foreach ($names as $key => $val) {
   }
   $score = $letterTotal*($key+1);
   echo "names[",$key,"] = ",$val," => ",$score,"\n";
+
+
+  
+	// $leftover = 0;
+	// for ($j=0; $j < count($numArray); $j++) { 
+	// 	$numArray[$j] = ($numArray[$j]*2)+$leftover;
+	// 	if ($numArray[$j]>9) {
+	// 		$numArray[$j]-=10;
+	// 		$leftover = 1;
+	// 		if (!isset($numArray[$j+1])) {
+	// 			$numArray[$j+1] = 0;
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		$leftover = 0;
+	// 	}
+	// }
+
+
 }
 
 $answer = 0;
