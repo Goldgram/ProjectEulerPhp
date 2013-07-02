@@ -35,9 +35,14 @@ $letters["Y"] = 25;
 $letters["Z"] = 26;
 
 
+$numArray[0] = 0;
+for ($i=1; $i < 70; $i++) { 
+	$numArray[$i] = 0;
+}
 
-// $numArray[0] = 0;
 
+
+$breakchecker = 0;
 
 sort($names);
 foreach ($names as $key => $val) {
@@ -45,29 +50,51 @@ foreach ($names as $key => $val) {
   for ($i=0; $i < strlen($val); $i++) {
   	$letterTotal += $letters[$val[$i]];
   }
-  $score = $letterTotal*($key+1);
+  $score = "".($letterTotal*($key+1));
   echo "names[",$key,"] = ",$val," => ",$score,"\n";
 
-
+  //echo intval($score);
   
-	// $leftover = 0;
-	// for ($j=0; $j < count($numArray); $j++) { 
-	// 	$numArray[$j] = ($numArray[$j]*2)+$leftover;
-	// 	if ($numArray[$j]>9) {
-	// 		$numArray[$j]-=10;
-	// 		$leftover = 1;
-	// 		if (!isset($numArray[$j+1])) {
-	// 			$numArray[$j+1] = 0;
-	// 		}
-	// 	}
-	// 	else
-	// 	{
-	// 		$leftover = 0;
-	// 	}
+	$leftover = 0;
+	for ($j=0; $j < count($numArray); $j++) {
+		if (isset($score[strlen($score)-1-$j])) {
+			$current = $numArray[$j] + intval($score[strlen($score)-1-$j]) + $leftover;
+			if (!isset($numArray[$j+1])) {
+				$numArray[$j+1] = 0;
+			}
+		}
+		else
+		{
+			$current = $numArray[$j] + $leftover;
+		}
+		
+		// $current = intval(substr($sumStr,50-$j,1))+intval(substr($nums[$i],50-$j,1))+$leftover;
+		$leftover=0;
+		if ($current>9) {
+			$current-=10;
+			$leftover=1;
+		}
+		// if (!isset($numArray[$j+1])) {
+		// 	$numArray[$j+1] = 0;
+		// }
+
+		$numArray[$j] = $current;
+	}
+	// if ($breakchecker==5) {
+	// 	break;
 	// }
-
-
+	// else
+	// {
+	// 	$breakchecker++;
+	// }
 }
+
+// for ($i=count($numArray)-1; $i >=0 ; $i--) { 
+// 	echo $numArray[$i];
+// }
+// echo "\n";
+
+var_dump($numArray);
 
 $answer = 0;
 $endTime = microtime(true);
