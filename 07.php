@@ -6,22 +6,21 @@ What is the 10 001st prime number?
 //simple prime varifier
 function isPrime($input)
 {
-	$coin = 1;
+	//$coin = 1;
 	$sq = sqrt($input);
-	for ($i=2; $i < $sq; $i++) {
+	for ($i=2; $i <= $sq; $i++) {
 		if ($input%$i==0) {
-			$coin--;
-			break;
+			return false;
 		}
 	}
-	return $coin;
+	return true;
 }
 
 $primeIndex = 0;
 $i=2;
 // loop until the 10001 prime found
 while ($primeIndex < 10001) {
-	if (isPrime($i)==1) {
+	if (isPrime($i)) {
 		$primeIndex++;
 		if ($primeIndex==10001) {
 			$AnswerPrime = $i;
@@ -33,5 +32,5 @@ while ($primeIndex < 10001) {
 $answer = $AnswerPrime;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 104009
+// Answer: 104743
 // Time: 0.242s
