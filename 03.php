@@ -8,7 +8,7 @@ function isPrime($input)
 {
 	$coin = 1;
 	$sq = sqrt($input);
-	for ($i=2; $i < $sq ; $i++) {
+	for ($i=2; $i <= $sq ; $i++) {
 		if (fmod($input, $i)==0) {
 			$coin--;
 			break;
@@ -58,4 +58,4 @@ $answer = $numbers[$i];
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 6857
-// Time: 2.7388s
+// Time: 2.5658s
