@@ -40,13 +40,13 @@ for ($i=1; $i < 28000; $i++) {
 	$wrong=0;
 	for ($j=0; $j < count($abundantNums); $j++) {
 		$currentNum = $i-$abundantNums[$j];
-		for ($k=0; $k < count($abundantNums); $k++) {
-			if ($currentNum==$abundantNums[$k]) {
+		// for ($k=0; $k < count($abundantNums); $k++) {
+			if (in_array($currentNum, $abundantNums)) {
 				echo "=> wrong\n";
 				$wrong++;
-				break 2;
+				break;
 			}
-		}
+		// }
 	}
 	if ($wrong==0) {
 		echo "=> correct1\n";
