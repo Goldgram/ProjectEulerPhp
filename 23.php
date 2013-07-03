@@ -22,36 +22,100 @@ function sumOfDiv($input)
 	return $divTotal;
 }
 
+// $abundantNums = array();
+// $abundantNumsIndex = 0;
+// for ($i=1; $i <= 2800; $i++) { 
+// 	echo $i," => ",sumOfDiv($i);
+// 	if (sumOfDiv($i)>$i) {
+// 		echo "<<";
+// 		$abundantNums[$abundantNumsIndex] = $i;
+// 		$abundantNumsIndex++;
+// 	}
+// 	echo "\n";
+// }
+// var_dump($abundantNums);
+
+// for ($i=1; $i < 2800; $i++) {
+// 	echo $i;
+// 	$wrong=0;
+// 	for ($j=0; $j < count($abundantNums); $j++) {
+// 		if ($abundantNums[$j]>=$i) {
+// 			break;
+// 		}
+
+
+// 		$currentNum = $i-$abundantNums[$j];
+// 		if (in_array($currentNum, $abundantNums)) {
+// 			echo "=> wrong\n";
+// 			$wrong++;
+// 			break;
+// 		}
+// 	}
+// 	if ($wrong==0) {
+// 		echo "=> correct1\n";
+// 	}
+// }
+
+
 $abundantNums = array();
 $abundantNumsIndex = 0;
-for ($i=1; $i <= 28000; $i++) { 
-	echo $i," => ",sumOfDiv($i);
+for ($i=1; $i <= 28123; $i++) { 
+	//echo $i," => ",sumOfDiv($i);
 	if (sumOfDiv($i)>$i) {
-		echo "<<";
+		//echo "<<";
 		$abundantNums[$abundantNumsIndex] = $i;
 		$abundantNumsIndex++;
 	}
-	echo "\n";
-}
-var_dump($abundantNums);
-
-for ($i=1; $i < 28000; $i++) {
 	echo $i;
+	//echo "\n";
 	$wrong=0;
 	for ($j=0; $j < count($abundantNums); $j++) {
+		if ($abundantNums[$j]>=$i) {
+			break;
+		}
+
+
 		$currentNum = $i-$abundantNums[$j];
-		// for ($k=0; $k < count($abundantNums); $k++) {
-			if (in_array($currentNum, $abundantNums)) {
-				echo "=> wrong\n";
-				$wrong++;
-				break;
-			}
-		// }
+		if (sumOfDiv($currentNum)>$currentNum) {
+			echo "=> wrong\n";
+			$wrong++;
+			break;
+		}
 	}
 	if ($wrong==0) {
 		echo "=> correct1\n";
 	}
+
+
+
+
+
 }
+//var_dump($abundantNums);
+
+// for ($i=1; $i < 2800; $i++) {
+// 	echo $i;
+// 	$wrong=0;
+// 	for ($j=0; $j < count($abundantNums); $j++) {
+// 		if ($abundantNums[$j]>=$i) {
+// 			break;
+// 		}
+
+
+// 		$currentNum = $i-$abundantNums[$j];
+// 		if (in_array($currentNum, $abundantNums)) {
+// 			echo "=> wrong\n";
+// 			$wrong++;
+// 			break;
+// 		}
+// 	}
+// 	if ($wrong==0) {
+// 		echo "=> correct1\n";
+// 	}
+// }
+
+
+
 
 $answer = 0;
 $endTime = microtime(true);
