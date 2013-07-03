@@ -49,22 +49,25 @@ function sumOfDiv($input)
 // 	}
 // }
 
+
+
+
 $abn = array();
 $abnIndex = 0;
-for ($i=1; $i <= 28123; $i++) { 
-	//echo $i," => ",sumOfDiv($i);
+for ($i=1; $i <= 50; $i++) { 
+	echo $i," => ",sumOfDiv($i);
 	if (sumOfDiv($i)>$i) {
-		//echo "<<";
+		echo "<<";
 		$abn[$abnIndex] = $i;
 		$abnIndex++;
 	}
-	//echo "\n";
+	echo "\n";
 }
 
 
 //$SumArray = array();
 
-
+echo "===========\n";
 
 
 
@@ -73,13 +76,13 @@ $Total = 0;
 
 
 $startnum = 1;
-$switch = true;
+// $switch = true;
 $i=0;
 $j=0;
 $current = 0;
 // for ($i=0; $i < $abnIndex; $i++) { 
 	// for ($j=0; $j < $abnIndex; $j++) {
-while ($current  <= 28123 )
+while ($current  < 50 )
 {
 	$current = $abn[$i]+$abn[$j];
 	for ($k=$startnum; $k < $current; $k++) { 
@@ -90,14 +93,14 @@ while ($current  <= 28123 )
 	$startnum = $current+1;
 	//echo $i," + ",$j,"\n";
 	//$SumArray[($abn[$i] + $abn[$j])] = true;
-	if ($switch == true) {
-		$switch = false;
-		++$i;
+	if (($abn[$i+1]+$abn[$j]) > ($abn[$i]+$abn[$j+1])) {
+		// $switch = false;
+		++$j;
 	}
 	else
 	{
-		$switch = true;
-		++$j;
+		// $switch = true;
+		++$i;
 	}
 	// not getting all abundant nums this way
 }
