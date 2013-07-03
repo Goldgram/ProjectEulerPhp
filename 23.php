@@ -22,18 +22,98 @@ function sumOfDiv($input)
 	return $divTotal;
 }
 
+//29sec code
+// $Total = 0;
 // $abundantNums = array();
 // $abundantNumsIndex = 0;
-// for ($i=1; $i <= 2800; $i++) { 
-// 	echo $i," => ",sumOfDiv($i);
+// for ($i=1; $i <= 20161; $i++) { 
+// 	//echo $i," => ",sumOfDiv($i);
 // 	if (sumOfDiv($i)>$i) {
-// 		echo "<<";
+// 		//echo "<<";
 // 		$abundantNums[$abundantNumsIndex] = $i;
 // 		$abundantNumsIndex++;
 // 	}
-// 	echo "\n";
+// 	$wrong=0;
+// 	for ($j=0; $j < count($abundantNums); $j++) {
+// 		if ($abundantNums[$j]>=$i) {
+// 			break;
+// 		}
+// 		$currentNum = $i-$abundantNums[$j];
+// 		if (sumOfDiv($currentNum)>$currentNum) {
+// 			$wrong++;
+// 			break;
+// 		}
+// 	}
+// 	if ($wrong==0) {
+// 		$Total += $i;
+// 	}
 // }
-// var_dump($abundantNums);
+
+$abn = array();
+$abnIndex = 0;
+for ($i=1; $i <= 28123; $i++) { 
+	//echo $i," => ",sumOfDiv($i);
+	if (sumOfDiv($i)>$i) {
+		//echo "<<";
+		$abn[$abnIndex] = $i;
+		$abnIndex++;
+	}
+	//echo "\n";
+}
+
+
+//$SumArray = array();
+
+
+
+
+
+$Total = 0;
+
+
+
+$startnum = 1;
+$switch = true;
+$i=0;
+$j=0;
+$current = 0;
+// for ($i=0; $i < $abnIndex; $i++) { 
+	// for ($j=0; $j < $abnIndex; $j++) {
+while ($current  <= 28123 )
+{
+	$current = $abn[$i]+$abn[$j];
+	for ($k=$startnum; $k < $current; $k++) { 
+		echo $k,"\n";
+		$Total += $k;
+	}
+	echo "-----\n";
+	$startnum = $current+1;
+	//echo $i," + ",$j,"\n";
+	//$SumArray[($abn[$i] + $abn[$j])] = true;
+	if ($switch == true) {
+		$switch = false;
+		++$i;
+	}
+	else
+	{
+		$switch = true;
+		++$j;
+	}
+	// not getting all abundant nums this way
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//var_dump($SumArray);
 
 // for ($i=1; $i < 2800; $i++) {
 // 	echo $i;
@@ -55,43 +135,7 @@ function sumOfDiv($input)
 // 		echo "=> correct1\n";
 // 	}
 // }
-$Total = 0;
 
-$abundantNums = array();
-$abundantNumsIndex = 0;
-for ($i=1; $i <= 20161; $i++) { 
-	//echo $i," => ",sumOfDiv($i);
-	if (sumOfDiv($i)>$i) {
-		//echo "<<";
-		$abundantNums[$abundantNumsIndex] = $i;
-		$abundantNumsIndex++;
-	}
-	//echo $i;
-	//echo "\n";
-	$wrong=0;
-	for ($j=0; $j < count($abundantNums); $j++) {
-		if ($abundantNums[$j]>=$i) {
-			break;
-		}
-
-
-		$currentNum = $i-$abundantNums[$j];
-		if (sumOfDiv($currentNum)>$currentNum) {
-			//echo "=> wrong\n";
-			$wrong++;
-			break;
-		}
-	}
-	if ($wrong==0) {
-		//echo "=> correct1\n";
-		$Total += $i;
-	}
-
-
-
-
-
-}
 //var_dump($abundantNums);
 
 // for ($i=1; $i < 2800; $i++) {
@@ -121,5 +165,5 @@ for ($i=1; $i <= 20161; $i++) {
 $answer = $Total;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
+// Answer: 4179871
 // Time: 
