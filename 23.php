@@ -21,12 +21,36 @@ function sumOfDiv($input)
 	}
 	return $divTotal;
 }
-for ($i=1; $i < 100; $i++) { 
+
+$abundantNums = array();
+$abundantNumsIndex = 0;
+for ($i=1; $i <= 28000; $i++) { 
 	echo $i," => ",sumOfDiv($i);
 	if (sumOfDiv($i)>$i) {
 		echo "<<";
+		$abundantNums[$abundantNumsIndex] = $i;
+		$abundantNumsIndex++;
 	}
 	echo "\n";
+}
+var_dump($abundantNums);
+
+for ($i=1; $i < 28000; $i++) {
+	echo $i;
+	$wrong=0;
+	for ($j=0; $j < count($abundantNums); $j++) {
+		$currentNum = $i-$abundantNums[$j];
+		for ($k=0; $k < count($abundantNums); $k++) {
+			if ($currentNum==$abundantNums[$k]) {
+				echo "=> wrong\n";
+				$wrong++;
+				break 2;
+			}
+		}
+	}
+	if ($wrong==0) {
+		echo "=> correct1\n";
+	}
 }
 
 $answer = 0;
