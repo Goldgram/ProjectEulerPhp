@@ -9,14 +9,15 @@ $nums = array();
 $nums[0] = "0";
 $nums[1] = "1";
 $nums[2] = "2";
-$nums[3] = "3";
-$nums[4] = "4";
-$nums[5] = "5";
-$nums[6] = "6";
-$nums[7] = "7";
-$nums[8] = "8";
-$nums[9] = "9";
+// $nums[3] = "3";
+// $nums[4] = "4";
+// $nums[5] = "5";
+// $nums[6] = "6";
+// $nums[7] = "7";
+// $nums[8] = "8";
+// $nums[9] = "9";
 
+$result = array();
 
 //started looking at brute force
 // function swap($a,$b)
@@ -51,25 +52,33 @@ function numOfComb($inputNum)
 	}
 	return $total;
 }
+function printResult()
+{
+	global $result;
+	
+}
 
 
-
-$perNum = 1000000;
+$perNum = 1;
 //for ($perNum=1; $perNum <= 6; $perNum++) { 
-	//for ($numIndex=1; $numIndex <= 2; $numIndex++) { 
-		$numIndex = 1;
+	for ($numIndex=0; $numIndex < count($nums); $numIndex++) { 
+		//$numIndex = 1;
 
 		$currentResult = 0;
-		$combsLeft = numOfComb(count($nums) - $numIndex);
-		for ($i=0; $i < count($nums); $i++) { 
+		$combsLeft = numOfComb(count($nums) - 1 - $numIndex);
+		for ($i=0; $i < (count($nums) - $numIndex); $i++) { 
 			$upToPosib = $i * $combsLeft;
 			//echo $upToPosib,"\n";
 			if ($upToPosib < $perNum) {
+				$currentUpToPosib = $upToPosib;
 				$currentResult = $i;
 			}
 		}
 		echo "= ",$currentResult,"\n";
-	//}
+		$result[$numIndex] = $currentResult;
+		$perNum -= $currentUpToPosib;
+	}
+var_dump($result);
 //}
 
 $answer = 0;
