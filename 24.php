@@ -54,12 +54,26 @@ function numOfComb($inputNum)
 }
 function printResult()
 {
-	global $result;
-	
+	global $result,$nums;
+
+	for ($i=0; $i < count($result); $i++) { 
+		$resultIndex = $result[$i];
+
+		$count = 0;
+		foreach ($nums as $key => $value) {
+			if ($resultIndex==$count) {
+				echo $value;
+				unset($nums[$value]);
+			}
+			//echo $key," => ",$value,"\n";
+			$count++;
+		}
+	}
+	echo "\n";
 }
 
 
-$perNum = 1;
+$perNum = 6;
 //for ($perNum=1; $perNum <= 6; $perNum++) { 
 	for ($numIndex=0; $numIndex < count($nums); $numIndex++) { 
 		//$numIndex = 1;
@@ -74,11 +88,12 @@ $perNum = 1;
 				$currentResult = $i;
 			}
 		}
-		echo "= ",$currentResult,"\n";
+		//echo "= ",$currentResult,"\n";
 		$result[$numIndex] = $currentResult;
 		$perNum -= $currentUpToPosib;
 	}
-var_dump($result);
+	printResult();
+//var_dump($result);
 //}
 
 $answer = 0;
