@@ -60,4 +60,4 @@ $answer = $printout;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 2783915460
-// Time: 0.00825s
+// Time: 0.00009s
