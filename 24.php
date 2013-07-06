@@ -16,34 +16,8 @@ $nums[6] = "6";
 $nums[7] = "7";
 $nums[8] = "8";
 $nums[9] = "9";
-
 $result = array();
-
-//started looking at brute force
-// function swap($a,$b)
-// {
-// 	global $nums;
-// 	$temp = $nums[$a];
-// 	$nums[$a] = $nums[$b];
-// 	$nums[$b] = $temp;
-// }
-// function echoAll()
-// {
-// 	global $nums;
-// 	for ($i=0; $i < 10; $i++) { 
-// 		echo $nums[$i];
-// 	}
-// 	echo "\n";
-// }
-// echoAll();
-// swap(8,9);
-// echoAll();
-// swap(8,9);
-// swap(7,8);
-// echoAll();
-
-
-
+//getting factorial of the inputNum(!)
 function numOfComb($inputNum)
 {
 	$total = 1;
@@ -52,50 +26,38 @@ function numOfComb($inputNum)
 	}
 	return $total;
 }
-function printResult()
-{
-	global $result,$nums;
-
-	for ($i=0; $i < count($result); $i++) { 
-		$resultIndex = $result[$i];
-
-		$count = 0;
-		foreach ($nums as $key => $value) {
-			if ($resultIndex==$count) {
-				echo $value;
-				unset($nums[$value]);
-			}
-			//echo $key," => ",$value,"\n";
-			$count++;
+//get the index values of each digit 
+//example first: 9! * the current number index (1-10), the result is the closest under 1 million
+$perNum = 1000000;
+for ($numIndex=0; $numIndex < count($nums); $numIndex++) { 
+	$currentResult = 0;
+	$combsLeft = numOfComb(count($nums) - 1 - $numIndex);
+	for ($i=0; $i < (count($nums) - $numIndex); $i++) { 
+		$upToPosib = $i * $combsLeft;
+		if ($upToPosib < $perNum) {
+			$currentUpToPosib = $upToPosib;
+			$currentResult = $i;
 		}
 	}
-	echo "\n";
+	$result[$numIndex] = $currentResult;
+	$perNum -= $currentUpToPosib;
+}
+//get the values of those indexes by removing elements used in the array
+$printout = "";
+for ($i=0; $i < count($result); $i++) { 
+	$resultIndex = $result[$i];
+	$count = 0;
+	foreach ($nums as $key => $value) {
+		if ($resultIndex==$count) {
+			$printout .= $value;
+			unset($nums[$value]);
+		}
+		$count++;
+	}
 }
 
-
-$perNum = 1000000;
-//for ($perNum=1; $perNum <= 6; $perNum++) { 
-	for ($numIndex=0; $numIndex < count($nums); $numIndex++) { 
-		//$numIndex = 1;
-
-		$currentResult = 0;
-		$combsLeft = numOfComb(count($nums) - 1 - $numIndex);
-		for ($i=0; $i < (count($nums) - $numIndex); $i++) { 
-			$upToPosib = $i * $combsLeft;
-			//echo $upToPosib,"\n";
-			if ($upToPosib < $perNum) {
-				$currentUpToPosib = $upToPosib;
-				$currentResult = $i;
-			}
-		}
-		//echo "= ",$currentResult,"\n";
-		$result[$numIndex] = $currentResult;
-		$perNum -= $currentUpToPosib;
-	}
-	printResult();
-//var_dump($result);
-//}
-
-$answer = 0;
+$answer = $printout;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 2783915460
+// Time: 0.00825s
