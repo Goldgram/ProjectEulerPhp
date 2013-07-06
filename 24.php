@@ -5,8 +5,72 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 
 -->
 <?php $startTime = microtime(true);
 
+$nums = array();
+$nums[0] = "0";
+$nums[1] = "1";
+$nums[2] = "2";
+$nums[3] = "3";
+$nums[4] = "4";
+$nums[5] = "5";
+$nums[6] = "6";
+$nums[7] = "7";
+$nums[8] = "8";
+$nums[9] = "9";
 
 
+//started looking at brute force
+// function swap($a,$b)
+// {
+// 	global $nums;
+// 	$temp = $nums[$a];
+// 	$nums[$a] = $nums[$b];
+// 	$nums[$b] = $temp;
+// }
+// function echoAll()
+// {
+// 	global $nums;
+// 	for ($i=0; $i < 10; $i++) { 
+// 		echo $nums[$i];
+// 	}
+// 	echo "\n";
+// }
+// echoAll();
+// swap(8,9);
+// echoAll();
+// swap(8,9);
+// swap(7,8);
+// echoAll();
+
+
+
+function numOfComb($inputNum)
+{
+	$total = 1;
+	for ($i=$inputNum; $i > 1; $i--) { 
+		$total *= $i;
+	}
+	return $total;
+}
+
+
+
+$perNum = 1000000;
+//for ($perNum=1; $perNum <= 6; $perNum++) { 
+	//for ($numIndex=1; $numIndex <= 2; $numIndex++) { 
+		$numIndex = 1;
+
+		$currentResult = 0;
+		$combsLeft = numOfComb(count($nums) - $numIndex);
+		for ($i=0; $i < count($nums); $i++) { 
+			$upToPosib = $i * $combsLeft;
+			//echo $upToPosib,"\n";
+			if ($upToPosib < $perNum) {
+				$currentResult = $i;
+			}
+		}
+		echo "= ",$currentResult,"\n";
+	//}
+//}
 
 $answer = 0;
 $endTime = microtime(true);
