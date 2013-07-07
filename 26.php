@@ -17,39 +17,41 @@ Find the value of d  1000 for which 1/d contains the longest recurring cycle in 
 function isMulRec($input)//is recursive of multiple nums
 {
 $numerator = 1;
-$numText = ".";
-for ($i=0; $i < 100; $i++) { 
+$numText = "0.";
+for ($i=0; $i < 10000; $i++) { 
 	$number = floor(($numerator*10)/$input);
 	$leftover = ($numerator*10)%$input;
-	echo $number," ~ ",$leftover;
+	//echo $number," ~ ",$leftover;
 	$numText .= $number;
 
 	if (strpos($numText, $number.$number.$number)) {
-		echo "<=\n";
+		//echo "<=\n";
 		return 0;
 	}
 
 
-	if (substr_count($numText,$numText[1])==3) {
-		echo "<= $numText\n";
+	//echo "\n";
 
-		$StrArray = explode($numText[1], $numText);
-		// echo "==\n";
-		// for ($j=0; $j < count($StrArray); $j++) { 
-		// 	echo $StrArray[$j],"\n";
-		// }
-		// echo "==\n";
-		if ($StrArray[1]==$StrArray[2]) {
-			return count($StrArray[1])+1;
+	$inputStr = substr($numText,(strlen("".$input)+1));
+	if (strlen($inputStr)%2==0 && strlen($inputStr)>2) {
+		//$inputStr = "".$input;
+		//echo substr($numText,(strlen($inputStr)+1)),"\n";
+		echo $inputStr,"\n";
+		echo substr($inputStr,0,strlen($inputStr)/2)," - ",substr($inputStr,strlen($inputStr)/2),"\n";
+		$firstHalf = substr($inputStr,0,strlen($inputStr)/2);
+		$firstHalfLength = strlen($firstHalf);
+		$secondHalf = substr($inputStr,strlen($inputStr)/2);
+		if ($firstHalf==$secondHalf) {
+			echo "> ",$firstHalfLength," <\n";
+			return $firstHalfLength;
+
 		}
-
-		
 	}
 
 
 
 
-	echo "\n";
+
 	if ($leftover==0) {
 		return 0;
 	}
@@ -65,9 +67,10 @@ for ($i=0; $i < 100; $i++) {
 
 
 for ($i=2; $i < 20; $i++) { 
-	echo $i," => ",(1/$i),"\n";
+	echo $i," => ",(1/$i),"\n----\n";
 	isMulRec($i);
-	echo "----\n";
+	//echo isMulRec($i),"\n";
+	echo "===================================================\n";
 }
 
 
