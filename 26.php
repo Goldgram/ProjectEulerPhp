@@ -18,62 +18,61 @@ function isMulRec($input)//is recursive of multiple nums
 {
 $numerator = 1;
 $numText = "0.";
-for ($i=0; $i < 10000; $i++) { 
+$leftover = 1;
+//for ($i=0; $i < 10000; $i++) {
+while ($leftover>0) {
 	$number = floor(($numerator*10)/$input);
 	$leftover = ($numerator*10)%$input;
 	//echo $number," ~ ",$leftover;
 	$numText .= $number;
 
-	if (strpos($numText, $number.$number.$number)) {
+	if (strpos($numText, $number.$number.$number.$number)) {
 		//echo "<=\n";
-		return 0;
+		return 1;
 	}
 
 
 	//echo "\n";
 
 	$inputStr = substr($numText,(strlen("".$input)+1));
-	if (strlen($inputStr)%2==0 && strlen($inputStr)>2) {
-		//$inputStr = "".$input;
-		//echo substr($numText,(strlen($inputStr)+1)),"\n";
-		echo $inputStr,"\n";
-		echo substr($inputStr,0,strlen($inputStr)/2)," - ",substr($inputStr,strlen($inputStr)/2),"\n";
-		$firstHalf = substr($inputStr,0,strlen($inputStr)/2);
-		$firstHalfLength = strlen($firstHalf);
-		$secondHalf = substr($inputStr,strlen($inputStr)/2);
-		if ($firstHalf==$secondHalf) {
-			echo "> ",$firstHalfLength," <\n";
-			return $firstHalfLength;
+	for ($i=0; $i < strlen($inputStr); $i+=2) { 
+		$inputStr = substr($inputStr,1,strlen($inputStr)-2);
+		if (strlen($inputStr)%2==0 && strlen($inputStr)>2) {
+			//$inputStr = "".$input;
+			//echo substr($numText,(strlen($inputStr)+1)),"\n";
+			// echo $inputStr,"\n";
+			// echo substr($inputStr,0,strlen($inputStr)/2)," - ",substr($inputStr,strlen($inputStr)/2),"\n";
+			$firstHalf = substr($inputStr,0,strlen($inputStr)/2);
+			$firstHalfLength = strlen($firstHalf);
+			$secondHalf = substr($inputStr,strlen($inputStr)/2);
+			if ($firstHalf==$secondHalf) {
+				// echo "> ",$firstHalfLength," <\n";
+				return $firstHalfLength;
 
+			}
 		}
 	}
 
-
-
-
-
-	if ($leftover==0) {
-		return 0;
-	}
-	else
-	{
-		$numerator = $leftover;
-	}
+	$numerator = $leftover;
 }
-
+return 0;
 
 	//return 0
 }
-
-
-for ($i=2; $i < 20; $i++) { 
-	echo $i," => ",(1/$i),"\n----\n";
-	isMulRec($i);
-	//echo isMulRec($i),"\n";
-	echo "===================================================\n";
+$HighestVal = 0;
+$HighestNum = 0;
+for ($i=2; $i < 1000; $i++) { 
+	//echo $i," => ",(1/$i),"\n";
+	$iRecValue = isMulRec($i);
+	if ($iRecValue>$HighestVal) {
+		$HighestVal = $iRecValue;
+		$HighestNum = $i;
+	}
+	// echo $i," => ",$iRecValue,"\n";
+	// echo "===================================================\n";
 }
 
 
-$answer = 0;
+$answer = $HighestNum;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
