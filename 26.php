@@ -17,21 +17,39 @@ Find the value of d  1000 for which 1/d contains the longest recurring cycle in 
 function isMulRec($input)//is recursive of multiple nums
 {
 $numerator = 1;
-$numText = "0.";
-for ($i=0; $i < 8; $i++) { 
+$numText = ".";
+for ($i=0; $i < 100; $i++) { 
 	$number = floor(($numerator*10)/$input);
 	$leftover = ($numerator*10)%$input;
 	echo $number," ~ ",$leftover;
 	$numText .= $number;
 
-
 	if (strpos($numText, $number.$number.$number)) {
 		echo "<=\n";
 		return 0;
 	}
-	echo "\n";
 
-	
+
+	if (substr_count($numText,$numText[1])==3) {
+		echo "<= $numText\n";
+
+		$StrArray = explode($numText[1], $numText);
+		// echo "==\n";
+		// for ($j=0; $j < count($StrArray); $j++) { 
+		// 	echo $StrArray[$j],"\n";
+		// }
+		// echo "==\n";
+		if ($StrArray[1]==$StrArray[2]) {
+			return count($StrArray[1])+1;
+		}
+
+		
+	}
+
+
+
+
+	echo "\n";
 	if ($leftover==0) {
 		return 0;
 	}
