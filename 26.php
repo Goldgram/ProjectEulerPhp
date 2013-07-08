@@ -29,7 +29,7 @@ function isMulRec($input)//is recursive of multiple nums
 			$testText .= $currentText;
 		}
 		if (substr_count($numText, $currentText)>1) {
-			// this isn't the exact number due to adding "." and "-" in but the offset is exact across all numbers, it's roughly x5 plus leading values that don't reoccur
+			//this isn't the exact number due to adding "." and "-" in but the offset is exact across all numbers, it's roughly x5 plus leading values that don't reoccur
 			//this returns 5 for any single digit cycle
 			return strripos($numText, $currentText)-stripos($numText, $currentText);
 		}
@@ -39,7 +39,7 @@ function isMulRec($input)//is recursive of multiple nums
 }
 $HighestVal = 0;
 $HighestNum = 0;
-for ($i=2; $i < 1000; $i++) { 
+for ($i=999; $i > 1; $i--) { 
 	$iRecValue = isMulRec($i);
 	if ($iRecValue>$HighestVal) {
 		$HighestVal = $iRecValue;
@@ -51,4 +51,4 @@ $answer = $HighestNum;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 983
-// Time: 0.44s
+// Time: 0.46s
