@@ -40,17 +40,15 @@ function isMulRec($input)//is recursive of multiple nums
 $HighestVal = 0;
 $HighestNum = 0;
 for ($i=2; $i < 1000; $i++) { 
-	//echo $i," => ",(1/$i),"\n";
 	$iRecValue = isMulRec($i);
 	if ($iRecValue>$HighestVal) {
 		$HighestVal = $iRecValue;
 		$HighestNum = $i;
 	}
-	//echo $i," => ",$iRecValue,"\n";
-	//echo "===================================================\n";
 }
-
 
 $answer = $HighestNum;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 983
+// Time: 0.44s
