@@ -13,8 +13,7 @@ Find the product of the coefficients, a and b, for the quadratic expression that
 
 function isPrime($input)
 {
-	//$coin = 1;
-	$input = sqrt($input*$input);
+	$input = sqrt($input*$input);//this accounts for minus values
 	$sq = sqrt($input);
 	for ($i=2; $i <= $sq; $i++) {
 		if ($input%$i==0) {
@@ -23,33 +22,34 @@ function isPrime($input)
 	}
 	return true;
 }
-
-
+$storeCount = 0;
+$storedA = 0;
+$storedB = 0;
 for ($a=-999; $a < 1000; $a++) { 
 	if (isPrime($a)) {
 		for ($b=-999; $b < 1000; $b++) { 
 			if (isPrime($b)) {
-				// echo "=> ",$a," and ",$b,"\n";
 				$count = 0;
 				$i = 0;
-				// $formulaVal = 0;
 				$formulaVal = ($i*$i) + ($a*$i)+$b;
 				while (isPrime($formulaVal)) {
 					$count++;
 					$i++;
 					$formulaVal = ($i*$i) + ($a*$i)+$b;
 				}
-				echo "=> ",$b," and ",$a," = ",$count,"\n";
+				if ($count > $storeCount) {
+					$storeCount = $count;
+					$storedA = $a;
+					$storedB = $b;
+				}
 			}
 		}
 	}
-	// echo $a,"\n";
 }
+$multiply = $storedA*$storedB;
 
-
-
-
-
-$answer = 0;
+$answer = $multiply;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: -59231
+// Time: 1.14s
