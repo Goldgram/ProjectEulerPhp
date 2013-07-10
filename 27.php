@@ -27,7 +27,7 @@ $storedA = 0;
 $storedB = 0;
 for ($a=-999; $a < 1000; $a++) { 
 	if (isPrime($a)) {
-		for ($b=-999; $b < 1000; $b++) { 
+		for ($b=$a; $b < 1000; $b++) { 
 			if (isPrime($b)) {
 				$count = 0;
 				$i = 0;
@@ -52,4 +52,4 @@ $answer = $multiply;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: -59231
-// Time: 1.14s
+// Time: 0.57s
