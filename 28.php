@@ -1,20 +1,30 @@
 <!-- 
-
+Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
+21 22 23 24 25
+20  7  8  9 10
+19  6  1  2 11
+18  5  4  3 12
+17 16 15 14 13
+It can be verified that the sum of the numbers on the diagonals is 101.
+What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
  -->
 <?php $startTime = microtime(true);
+
 $total=1;
-$int =2;
+$increase =2;
 $num=1;
-While $num<1001*1001
+$gridSize = 1001;
+$endNum = $gridSize*$gridSize;
+while ($num < $endNum) {
+	for ($i=0; $i < 4; $i++) { 
+		$num += $increase;
+		$total += $num;
+	}
+	$increase+=2;
+}
 
-For 4 times
-$num += $int;
-$total = $num;
-
-$int+=2;
-
-Echo total
-
-$answer = 0;
+$answer = $total;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 669171001
+// Time: 0.0002s
