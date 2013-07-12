@@ -22,15 +22,19 @@ function SumPowFive($input)
 	return $total;
 }
 $min = "2";
-while (intval($min) < SumPowFive($min)) {
+$sumMin = 10;
+while (intval($min) < $sumMin) {
 	$min .= "2";
+	$sumMin = SumPowFive($min);
 }
 $max = "9";
-while (intval($max) < SumPowFive($max)) {
+$sumMax = 10;
+while (intval($max) < $sumMax) {
 	$max .= "9";
+	$sumMax = SumPowFive($max);
 }
 $grandTotal = 0;
-for ($i=$min; $i < $max; $i++) { 
+for ($i=$sumMin; $i < $sumMax; $i++) { 
 	$str = "".$i;
 	$total = SumPowFive($str);
 	if ($total===$i) {
@@ -42,4 +46,4 @@ $answer = $grandTotal;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 443839
-// Time: 12.46s
+// Time: 4.25s
