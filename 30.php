@@ -9,31 +9,37 @@ Find the sum of all the numbers that can be written as the sum of fifth powers o
  -->
 <?php $startTime = microtime(true);
 
-$min = "2";
-For 1-10?
-echo SumPowFive($min),"\n";
-$min .= "2";
-
-$grandTotal = 0;
-for ($i=1; $i < 999999; $i++) { 
-	$str = "".$i;
-	//echo intval($str[0]),"\n";
+function SumPowFive($input)
+{
 	$total = 0;
-	for ($j=0; $j < strlen($str); $j++) {
+	for ($j=0; $j < strlen($input); $j++) {
 		$mulTotal = 1;
 		for ($k=0; $k < 5; $k++) { 
-			$mulTotal *= intval($str[$j]);
+			$mulTotal *= intval($input[$j]);
 		}
 		$total += $mulTotal;
 	}
+	return $total;
+}
+$min = "2";
+while (intval($min) < SumPowFive($min)) {
+	$min .= "2";
+}
+$max = "9";
+while (intval($max) < SumPowFive($max)) {
+	$max .= "9";
+}
+$grandTotal = 0;
+for ($i=$min; $i < $max; $i++) { 
+	$str = "".$i;
+	$total = SumPowFive($str);
 	if ($total===$i) {
-		// echo $i,"\n";
 		$grandTotal += $i;
 	}
-	echo $i,"\n";
 }
-
 
 $answer = $grandTotal;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
+// Answer: 443839
+// Time: 12.46s
