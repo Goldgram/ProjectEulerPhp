@@ -8,6 +8,12 @@ The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
  -->
 <?php $startTime = microtime(true);
+
+$min = "2";
+For 1-10?
+echo SumPowFive($min),"\n";
+$min .= "2";
+
 $grandTotal = 0;
 for ($i=1; $i < 999999; $i++) { 
 	$str = "".$i;
