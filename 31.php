@@ -7,17 +7,39 @@ How many different ways can £2 be made using any number of coins?
  -->
 <?php $startTime = microtime(true);
 
-$count = 0;
-for ($OneP=0; $OneP <= 200; $OneP++) { 
-	for ($TwoP=0; $TwoP <=100 ; $TwoP++) { 
-		for ($FiveP=0; $FiveP <= 40; $FiveP++) {
-			for ($TenP=0; $TenP <=20; $TenP++) { 
-				for ($TwentyP=0; $TwentyP <= 10; $TwentyP++) { 
-					for ($FiftyP=0; $FiftyP <= 4; $FiftyP++) { 
-						for ($OnePound=0; $OnePound <= 2 ; $OnePound++) { 
-							for ($TwoPound=0; $TwoPound <= 1 ; $TwoPound++) { 
-								$count++;
-								echo $count,"\n";
+function checkVal($inputVal,$nextCoin)
+{
+	return floor((200 - $inputVal)/$nextCoin);
+}
+$count = 1;//starting with the 2 pound singular count
+for ($OnePound=0; $OnePound <= 2 ; $OnePound++) {
+	$val = ($OnePound*100);
+	$FiftyPMax = checkVal($val,50);
+
+	for ($FiftyP=0; $FiftyP <= $FiftyPMax; $FiftyP++) {
+		$val = ($OnePound*100) + ($FiftyP*50);
+		$TwentyPMax = checkVal($val,20);
+
+		for ($TwentyP=0; $TwentyP <= $TwentyPMax; $TwentyP++) { 
+			$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20);
+			$TenPMax = checkVal($val,10);
+
+			for ($TenP=0; $TenP <= $TenPMax; $TenP++) { 
+			$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10);
+			$FivePMax = checkVal($val,5);
+
+				for ($FiveP=0; $FiveP <= $FivePMax; $FiveP++) {
+				$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10) + ($FiveP*5);
+				$TwoPMax = checkVal($val,2);
+
+					for ($TwoP=0; $TwoP <= $TwoPMax; $TwoP++) {
+					$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10) + ($FiveP*5) + ($TwoP*2);
+					$OnePMax = checkVal($val,1);
+
+		 				for ($OneP=0; $OneP <= $OnePMax; $OneP++) {
+							$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10) + ($FiveP*5) + ($TwoP*2) + ($OneP*1);
+							if ($val == 200) {
+		  					$count++;
 							}
 						}
 					}
@@ -27,9 +49,8 @@ for ($OneP=0; $OneP <= 200; $OneP++) {
 	}
 }
 
-
-$answer = 0;
+$answer = $count;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 73682
+// Time: 0.64s
