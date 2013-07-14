@@ -13,26 +13,19 @@ function checkVal($inputVal,$nextCoin)
 }
 $count = 1;//starting with the 2 pound singular count
 for ($OnePound=0; $OnePound <= 2 ; $OnePound++) {
-	$val = ($OnePound*100);
-	$FiftyPMax = checkVal($val,50);
+	$FiftyPMax = checkVal(($OnePound*100),50);
 	for ($FiftyP=0; $FiftyP <= $FiftyPMax; $FiftyP++) {
-		$val = ($OnePound*100) + ($FiftyP*50);
-		$TwentyPMax = checkVal($val,20);
+		$TwentyPMax = checkVal(($OnePound*100)+($FiftyP*50),20);
 		for ($TwentyP=0; $TwentyP <= $TwentyPMax; $TwentyP++) { 
-			$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20);
-			$TenPMax = checkVal($val,10);
+			$TenPMax = checkVal(($OnePound*100)+($FiftyP*50)+($TwentyP*20),10);
 			for ($TenP=0; $TenP <= $TenPMax; $TenP++) { 
-				$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10);
-				$FivePMax = checkVal($val,5);
+				$FivePMax = checkVal(($OnePound*100)+($FiftyP*50)+($TwentyP*20)+($TenP*10),5);
 				for ($FiveP=0; $FiveP <= $FivePMax; $FiveP++) {
-					$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10) + ($FiveP*5);
-					$TwoPMax = checkVal($val,2);
+					$TwoPMax = checkVal(($OnePound*100)+($FiftyP*50)+($TwentyP*20)+($TenP*10)+($FiveP*5),2);
 					for ($TwoP=0; $TwoP <= $TwoPMax; $TwoP++) {
-						$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10) + ($FiveP*5) + ($TwoP*2);
-						$OnePMax = checkVal($val,1);
+						$OnePMax = checkVal(($OnePound*100)+($FiftyP*50)+($TwentyP*20)+($TenP*10)+($FiveP*5)+($TwoP*2),1);
 		 				for ($OneP=0; $OneP <= $OnePMax; $OneP++) {
-							$val = ($OnePound*100) + ($FiftyP*50) + ($TwentyP*20) + ($TenP*10) + ($FiveP*5) + ($TwoP*2) + ($OneP*1);
-							if ($val == 200) {
+							if (($OnePound*100)+($FiftyP*50)+($TwentyP*20)+($TenP*10)+($FiveP*5)+($TwoP*2)+($OneP*1) == 200) {
 		  					$count++;
 							}
 						}
