@@ -8,7 +8,6 @@ For which value of p ≤ 1000, is the number of solutions maximised?
 
 $highestCount = 0;
 $highestCountP = 0;
-
 for ($p=6; $p <= 1000; $p++) { 
 	$count = 0;
 	for ($a=2; $a <= ($p/2); $a++) {
