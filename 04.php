@@ -6,8 +6,6 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 
 $lowest = 100*100;
 $highest = 999*999;
-$breakVar = 0;
-
 //get all palindromic numbers
 for ($i=$highest; $i >= $lowest; $i--) { 
 	$numStr = ''+$i;
@@ -17,14 +15,9 @@ for ($i=$highest; $i >= $lowest; $i--) {
 			//check if both nums are whole and 3 digits
 			if ($i%$j==0 && ($i/$j)>=100 && ($i/$j)<=999) {
 				$HighestPal = $i;
-				$breakVar = 1;
-				break;
+				break 2;
 			}
 		}
-	}
-	if ($breakVar == 1)
-	{
-		break;
 	}
 }
 
@@ -32,4 +25,4 @@ $answer = $HighestPal;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 906609
-// Time: 0.0652s
+// Time: 0.045s
