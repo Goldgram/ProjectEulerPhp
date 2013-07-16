@@ -50,55 +50,6 @@ function isPrime($input) {
 
 
 
-function loop($str,$upTo)
-{
-	global $numLoops,$count,$highestVal;
-	$numLoops++;
-	// echo $numLoops,"\n";
-	for($b=$upTo; $b >= 1; $b--) {//2
-		if(strpos($str,"".$b)){continue;}
-		$str .= $b;
-		if (strlen($str)<=$upTo) {
-			loop($str,$upTo);
-		}
-		else {
-			// $count++;
-			// echo $str,"\n";
-			$currentNum = intval(substr($str, 1));
-			if (isPrime($currentNum)) {
-				// echo $str,"\n";
-				// return $str;
-				if ($currentNum>$highestVal) {
-					$highestVal = $currentNum;
-				}
-			}
-		}
-		$str = substr($str,0,-1);
-	}
-}
-
-// $upTo = 7;
-// $result = "";
-$highestVal = 0;
-for ($upTo=9; $upTo >= 1; $upTo--) { 
-	$str = ".";
-	// $count = 0;
-	$numLoops = 0;
-	loop($str,$upTo);
-	// echo "count: ",$count,"\n";
-	if ($highestVal>0) {
-		// echo ">",$highestVal,"< count: ",$count,"\n";
-		break;
-	}
-}
-
-// for($a=3; $a >= 1; $a--) {//1
-// 	$str .= $a;
-// 	loop($str);
-// 	$str = substr($str,0,-1);
-// }
-
-
 
 // for($a=9; $a >= 1; $a--) {//1
 // 	$str .= $a;
@@ -152,62 +103,42 @@ for ($upTo=9; $upTo >= 1; $upTo--) {
 // echo $count,"\n";
 
 
-
-
-
-// $numLoops = 0;
-// $upTo = 3;
-// $a[0] = 0;
-// $a = array();
-// function recLoop()
-// {
-// 	global $numLoops,$upTo,$a;
-// 	$numLoops++;
-// 	for($a[$numLoops]=$upTo; $a[$numLoops] >= 1; $a[$numLoops]--) {
-// 		echo $a[$numLoops],"\n";
-// 		// if (!in_array($a[$numLoops],$a)) {
-// 			// if ($numLoops<$upTo) {
-// 			// 	recLoop($a);
-// 			// }
-// 		// 	else
-// 		// 	{
-// 		// 		$testStr = "";
-// 		// 		for ($i=1; $i <= $numLoops; $i++) { 
-// 		// 			$testStr .= $a[$i];
-// 		// 		}
-// 		// 		// if (isPrime(intval($testStr))) {
-// 		// 			echo $testStr,"\n";
-// 		// 		// }
-// 		// 	}
-// 		// }
-// 	}
-// }
-// recLoop();
-
-
-// $upTo = 3;
-// $numLoops = 0;
-// // $a = array();
-// function loop($input)
-// {
-// 	$str = $input;
-// 	global $numLoops,$upTo;
-// 	$numLoops++;
-// 	for ($i=1; $i <= $upTo; $i++) { 
-// 		$str .= $i;
-// 		echo $i,"\n";
-// 		if ($numLoops<$upTo) {
-// 			loop($str);
-// 		}
-// 		$str = substr($str,0,strlen($str)-1);
-// 	}
-// 	echo $str,"\n====\n";
-// }
-// loop(".");
-
+function recLoop($str,$upTo)
+{
+	global $numLoops,$count,$highestVal;
+	$numLoops++;
+	for($b=$upTo; $b >= 1; $b--) {//2
+		if(strpos($str,"".$b))
+		{
+			continue;
+		}
+		$str .= $b;
+		if (strlen($str)<=$upTo) {
+			recLoop($str,$upTo);
+		}
+		else {
+			$currentNum = intval(substr($str, 1));
+			if (isPrime($currentNum)) {
+				if ($currentNum>$highestVal) {
+					$highestVal = $currentNum;
+				}
+			}
+		}
+		$str = substr($str,0,-1);
+	}
+}
+$highestVal = 0;
+for ($upTo=9; $upTo >= 1; $upTo--) { 
+	$str = ".";
+	$numLoops = 0;
+	recLoop($str,$upTo);
+	if ($highestVal>0) {
+		break;
+	}
+}
 
 $answer = $highestVal;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 7652413 
+// Time: 5.4s
