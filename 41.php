@@ -6,32 +6,207 @@ What is the largest n-digit pandigital prime that exists?
 
 function isPrime($input) {
 	$sq = sqrt($input);
-	for ($i=2; $i <= $sq; $i++) {
-		if ($input%$i==0) {
+	for($i=2; $i <= $sq; $i++) {
+		if($input%$i==0) {
 			return false;
 		}
 	}
 	return true;
 }
 
-for ($a=1; $a < 10; $a++) {
-	for ($b=1; $b < 10; $b++) {
-		if($b==$a)
-		{
-			continue;
+// $count = 0;
+// for($a=9; $a >= 1; $a--) {//1
+// 	for($b=9; $b >= 1; $b--) {//2
+// 		if($b==$a){continue;}
+// 		for($c=9; $c >= 1; $c--) {//3
+// 			if($c==$a||$c==$b){continue;}
+// 			for($d=9; $d >= 1; $d--) {//4
+// 				if($d==$a||$d==$b||$d==$c){continue;}
+// 				for($e=9; $e >= 1; $e--) {//5
+// 					if($e==$a||$e==$b||$e==$c||$e==$d){continue;}
+// 					for($f=9; $f >= 1; $f--) {//6
+// 						if($f==$a||$f==$b||$f==$c||$f==$d||$f==$e){continue;}
+// 						for($g=9; $g >= 1; $g--) {//7
+// 							if($g==$a||$g==$b||$g==$c||$g==$d||$g==$e||$g==$f){continue;}
+// 							for($h=9; $h >= 1; $h--) {//8
+// 								if($h==$a||$h==$b||$h==$c||$h==$d||$h==$e||$h==$f||$h==$g){continue;}
+// 								for($i=9; $i >= 1; $i--) {//9
+// 									if($i==$a||$i==$b||$i==$c||$i==$d||$i==$e||$i==$f||$i==$g||$i==$h){continue;}
+// 									// $count++;
+// 									$testStr = "".$a.$b.$c.$d.$e.$f.$g.$h.$i;
+// 									if (isPrime(intval($testStr))) {
+// 										echo $testStr,"\n";
+// 									}
+// 								}
+// 							}
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+// echo $count,"\n";
+
+
+
+function loop($str,$upTo)
+{
+	global $numLoops,$count,$highestVal;
+	$numLoops++;
+	// echo $numLoops,"\n";
+	for($b=$upTo; $b >= 1; $b--) {//2
+		if(strpos($str,"".$b)){continue;}
+		$str .= $b;
+		if (strlen($str)<=$upTo) {
+			loop($str,$upTo);
 		}
-		for ($c=1; $c < 10; $c++) {
-			if($c==$b || $c==$b)
-			{
-				continue;
+		else {
+			// $count++;
+			// echo $str,"\n";
+			$currentNum = intval(substr($str, 1));
+			if (isPrime($currentNum)) {
+				// echo $str,"\n";
+				// return $str;
+				if ($currentNum>$highestVal) {
+					$highestVal = $currentNum;
+				}
 			}
-			echo $a," ",$b," ",$c,"\n";
 		}
+		$str = substr($str,0,-1);
 	}
 }
 
+// $upTo = 7;
+// $result = "";
+$highestVal = 0;
+for ($upTo=9; $upTo >= 1; $upTo--) { 
+	$str = ".";
+	// $count = 0;
+	$numLoops = 0;
+	loop($str,$upTo);
+	// echo "count: ",$count,"\n";
+	if ($highestVal>0) {
+		// echo ">",$highestVal,"< count: ",$count,"\n";
+		break;
+	}
+}
 
-$answer = 0;
+// for($a=3; $a >= 1; $a--) {//1
+// 	$str .= $a;
+// 	loop($str);
+// 	$str = substr($str,0,-1);
+// }
+
+
+
+// for($a=9; $a >= 1; $a--) {//1
+// 	$str .= $a;
+// 	for($b=9; $b >= 1; $b--) {//2
+// 		if(strpos($str,"".$b)){continue;}
+// 		$str .= $b;
+// 		for($c=9; $c >= 1; $c--) {//3
+// 			if(strpos($str,"".$c)){continue;}
+// 			$str .= $c;
+// 			for($d=9; $d >= 1; $d--) {//4
+// 				if(strpos($str,"".$d)){continue;}
+// 				$str .= $d;
+// 				for($e=9; $e >= 1; $e--) {//5
+// 					if(strpos($str,"".$e)){continue;}
+// 					$str .= $e;
+// 					for($f=9; $f >= 1; $f--) {//6
+// 						if(strpos($str,"".$f)){continue;}
+// 						$str .= $f;
+// 						for($g=9; $g >= 1; $g--) {//7
+// 							if(strpos($str,"".$g)){continue;}
+// 							$str .= $g;
+// 							for($h=9; $h >= 1; $h--) {//8
+// 								if(strpos($str,"".$h)){continue;}
+// 								$str .= $h;
+// 								for($i=9; $i >= 1; $i--) {//9
+// 									if(strpos($str,"".$i)){continue;}
+// 									// echo $str,"\n";
+// 									// break 10;
+// 									$count++;
+// 									// $testStr = "".$a.$b.$c.$d.$e.$f.$g.$h.$i;
+// 									// if (isPrime(intval($testStr))) {
+// 									// 	echo $testStr,"\n";
+// 									// }
+// 								}
+// 								$str = substr($str,0,-1);
+// 							}
+// 							$str = substr($str,0,-1);
+// 						}
+// 						$str = substr($str,0,-1);
+// 					}
+// 					$str = substr($str,0,-1);
+// 				}
+// 				$str = substr($str,0,-1);
+// 			}
+// 			$str = substr($str,0,-1);
+// 		}
+// 		$str = substr($str,0,-1);
+// 	}
+// 	$str = substr($str,0,-1);
+// }
+// echo $count,"\n";
+
+
+
+
+
+// $numLoops = 0;
+// $upTo = 3;
+// $a[0] = 0;
+// $a = array();
+// function recLoop()
+// {
+// 	global $numLoops,$upTo,$a;
+// 	$numLoops++;
+// 	for($a[$numLoops]=$upTo; $a[$numLoops] >= 1; $a[$numLoops]--) {
+// 		echo $a[$numLoops],"\n";
+// 		// if (!in_array($a[$numLoops],$a)) {
+// 			// if ($numLoops<$upTo) {
+// 			// 	recLoop($a);
+// 			// }
+// 		// 	else
+// 		// 	{
+// 		// 		$testStr = "";
+// 		// 		for ($i=1; $i <= $numLoops; $i++) { 
+// 		// 			$testStr .= $a[$i];
+// 		// 		}
+// 		// 		// if (isPrime(intval($testStr))) {
+// 		// 			echo $testStr,"\n";
+// 		// 		// }
+// 		// 	}
+// 		// }
+// 	}
+// }
+// recLoop();
+
+
+// $upTo = 3;
+// $numLoops = 0;
+// // $a = array();
+// function loop($input)
+// {
+// 	$str = $input;
+// 	global $numLoops,$upTo;
+// 	$numLoops++;
+// 	for ($i=1; $i <= $upTo; $i++) { 
+// 		$str .= $i;
+// 		echo $i,"\n";
+// 		if ($numLoops<$upTo) {
+// 			loop($str);
+// 		}
+// 		$str = substr($str,0,strlen($str)-1);
+// 	}
+// 	echo $str,"\n====\n";
+// }
+// loop(".");
+
+
+$answer = $highestVal;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 
