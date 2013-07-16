@@ -14,6 +14,21 @@ function isPrime($input) {
 	return true;
 }
 
+for ($a=1; $a < 10; $a++) {
+	for ($b=1; $b < 10; $b++) {
+		if($b==$a)
+		{
+			continue;
+		}
+		for ($c=1; $c < 10; $c++) {
+			if($c==$b || $c==$b)
+			{
+				continue;
+			}
+			echo $a," ",$b," ",$c,"\n";
+		}
+	}
+}
 
 
 $answer = 0;
