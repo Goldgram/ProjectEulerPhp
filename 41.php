@@ -15,7 +15,6 @@ function isPrime($input) {
 }
 function recLoop($currentStr,$upTo)
 {
-	global $highestVal;
 	for($b=$upTo; $b >= 1; $b--) {//2
 		if(strpos($currentStr,"".$b))
 		{
@@ -23,29 +22,29 @@ function recLoop($currentStr,$upTo)
 		}
 		$currentStr .= $b;
 		if (strlen($currentStr)<=$upTo) {
-			recLoop($currentStr,$upTo);
+			$result = recLoop($currentStr,$upTo);
+			if ($result) {
+				return $result;
+			}
 		}
 		else {
 			$currentNum = intval(substr($currentStr, 1));
 			if (isPrime($currentNum)) {
-				if ($currentNum>$highestVal) {
-					$highestVal = $currentNum;
-				}
+				return $currentNum;
 			}
 		}
 		$currentStr = substr($currentStr,0,-1);
 	}
 }
-$highestVal = 0;
 for ($upTo=9; $upTo >= 1; $upTo--) { 
-	recLoop(".",$upTo);
-	if ($highestVal>0) {
+	$result = recLoop(".",$upTo);
+	if ($result) {
 		break;
 	}
 }
 
-$answer = $highestVal;
+$answer = $result;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 7652413 
-// Time: 4.8s
+// Time: 3.5s
