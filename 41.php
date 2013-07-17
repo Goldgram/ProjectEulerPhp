@@ -15,7 +15,7 @@ function isPrime($input) {
 }
 function recLoop($currentStr,$upTo)
 {
-	for($b=$upTo; $b >= 1; $b--) {//2
+	for($b=$upTo; $b >= 1; $b--) {
 		if(strpos($currentStr,"".$b))
 		{
 			continue;
