@@ -21,47 +21,70 @@ $divs[3] = 7;
 $divs[4] = 11;
 $divs[5] = 13;
 $divs[6] = 17;
-
+$resultArray = array();
+$resultArrayIndex=0;
+// $total = 0;
 
 function hasDivProp($input)
 {
 	global $divs;
 	for ($i=0; $i < 7; $i++) {
-		if (intval(substr($input,2+$i,3))%$divs[$i]!=0) {
+		// echo intval(substr($input,2+$i,3))," % ",$divs[$i],"\n";
+		if (intval(substr($input,($i+2),3))%$divs[$i]!=0) {
 			return false;
 		}
 	}
 	return true;
 }
+// function hasDivProp($inputStr)
+// {
+// 	global $divs;
+// 	$thisStrLen = strlen($inputStr);
+// 	if ($thisStrLen<5) {
+// 		return true;
+// 	}
+// 	else if (intval(substr($inputStr,($thisStrLen-3),3)) % $divs[$thisStrLen-4]==0) {
+// 		// echo $inputStr," => ",intval(substr($inputStr,($thisStrLen-3),3))," % ",$divs[$thisStrLen-5],"\n";
+// 		return true;
+// 	}
+// 	return false;
+// }
 //pandigital n to 0
 function pandigitalRec($currentStr,$upTo)
 {
-	global $total;
+	global $total, $resultArray, $resultArrayIndex;
 	$upToPlusTwo = $upTo+2;
-	for($i=$upTo; $i >= 0; $i--) {//2
-		if(strpos($currentStr,"".$i))
+	for($i=$upTo; $i >= 0; $i--) {
+		if(!strpos($currentStr,"".$i))// && hasDivProp($currentStr))
 		{
-			continue;
-		}
-		$currentStr .= $i;
-		if (strlen($currentStr)<$upToPlusTwo) {
-			pandigitalRec($currentStr,$upTo);
-		}
-		else {
-			// echo substr($currentStr, 1),"\n";
-			// $total++;
-			if (hasDivProp($currentStr)) {
-				$total+= intval(substr($currentStr,1));
+			$currentStr .= $i;
+			if (strlen($currentStr)<$upToPlusTwo) {
+				pandigitalRec($currentStr,$upTo);
 			}
+			else {
+				if (hasDivProp($currentStr)) {
+					$resultArray[$resultArrayIndex] = substr($currentStr,1);
+					$resultArrayIndex++;
 
+				}
+				// echo "\n";
+			}
+			$currentStr = substr($currentStr,0,-1);
+			// continue;
 		}
-		$currentStr = substr($currentStr,0,-1);
 	}
 }
+// echo substr($currentStr, 1),"\n";
+// echo substr($currentStr, 1);
+// $total++;
+// echo " <= ",intval(substr($currentStr,1));
+// echo $total," + ",intval(substr($currentStr,1));
+// $total += intval(substr($currentStr,1));
+// echo " = ",$total,"\n";
 
-$total = 0;
 pandigitalRec(".",9);
-
+var_dump($resultArray);
+$total = array_sum($resultArray);
 
 $answer = $total;
 $endTime = microtime(true);
