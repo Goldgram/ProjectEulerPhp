@@ -6,33 +6,36 @@ Find the pair of pentagonal numbers, Pj and Pk, for which their sum and differen
  -->
 <?php $startTime = microtime(true);
 
-$upTo = 100;
-
-for ($n=1; $n <= $upTo; $n++) {
-	$pent[$n] = ($n*((3*$n)-1))/2;
+$upTo = 2200;//added hundreds until result and break
+$D = 0;
+function isPentagonal($input){
+	$number = (sqrt((24*$input)+1)+1)/6;
+	if (floor($number) == $number)
+	{
+		return true;
+	}
+	return false;
 }
-
 for ($i=1; $i <= $upTo; $i++) { 
 	for ($j=$i+1; $j <= $upTo; $j++) {
-		if ($pent[$i]>$pent[$j]) {
-		 	$difference = $pent[$i]-$pent[$j];
+		$pentI = ($i*((3*$i)-1))/2;
+		$pentJ = ($j*((3*$j)-1))/2;
+		if ($pentI>$pentJ) {
+		 	$difference = $pentI-$pentJ;
 		}
 		else
 		{
-			$difference = $pent[$j]-$pent[$i];
+			$difference = $pentJ-$pentI;
 		}
-		if (in_array(($pent[$i]+$pent[$j]),$pent) && in_array($difference,$pent)) {
-			echo $pent[$i]," + ",$pent[$j]," = ",($pent[$i]+$pent[$j]),"\n";
-
+		if (is_Pentagonal($pentI+$pentJ) && is_Pentagonal($difference)) {
+			$D = $difference;
+			break 2;
 		}
 	}
 }
-// && in_array($pent,$pent[$i]+$pent[$j]))
 
-
-
-$answer = 0;
+$answer = $D;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 5482660
+// Time: 1.49s
