@@ -12,6 +12,9 @@ What is the smallest odd composite that cannot be written as the sum of a prime 
 <?php $startTime = microtime(true);
 
 function isPrime($input) {
+	if ($input==1) {
+		return false;
+	}
 	$sq = sqrt($input);
 	for($i=2; $i <= $sq; $i++) {
 		if($input%$i==0) {
@@ -20,65 +23,31 @@ function isPrime($input) {
 	}
 	return true;
 }
-function isComposite($input) {//opposit of prime
-	$sq = sqrt($input);
-	for ($i=2; $i <= $sq; $i++) {
-		if ($input%$i==0) {
-			return true;
-		}
-	}
-	return false;
-}
-for ($i=4; $i <= 20; $i++) { 
-	if (isComposite($i)) {
-		echo "=>",$i,"\n";
+$i=9;
+$result = 0;
+while ($result==0) {
+	if (!isPrime($i)) {
+		$j = 1;
+		$num = 2;
 		$checker = 0;
-		for ($j=2; $j <= $i-2; $j++) { 
-			if (isPrime($i-$j)) {
-				echo ($i-$j);
-				$num = sqrt(($i-$j)/2);
-				if (floor($num) == $num)
-				{
-					$checker++;
-					echo "<=";
-				}
-				echo "\n";
+		while ((2*($j*$j))<$i) {
+			$num = $i-(2*($j*$j));
+			if (isPrime($num)) {
+				$checker++;
+				break;
 			}
+			$j++;
 		}
 		if ($checker==0) {
-			echo "=====>>>>>",$i," =? ",$checker,"\n";
+			$result = $i;
 			break;
 		}
-		// echo "====\n";
 	}
+	$i+=2;
 }
 
-
-// $i=4;
-// $result = 0;
-// // $checker = false;
-// while ($result==0) {
-// 	if (isComposite($i)) {
-// 		$checker = false;
-// 		for ($j=2; $j <= $i-2; $j++) { 
-// 			$num = sqrt(($i-$j)/2);
-// 			if (floor($num) == $num)
-// 			{
-// 				$checker = true;
-// 			}
-// 		}
-// 		if (!$checker) {
-// 			echo $i,"\n";
-// 			$result = $i;
-// 		}
-// 		// echo "====\n";
-// 	}
-// 	$i++;
-// }
-// echo $i,"\n";
-
-$answer = 0;
+$answer = $result;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 5777
+// Time: 0.02s
