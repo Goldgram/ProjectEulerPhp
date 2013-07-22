@@ -10,11 +10,7 @@ Find the first four consecutive integers to have four distinct prime factors. Wh
  -->
 <?php $startTime = microtime(true);
 
-
 function isPrime($input) {
-	// if ($input==1) {
-	// 	return false;
-	// }
 	$sq = sqrt($input);
 	for($i=2; $i <= $sq; $i++) {
 		if($input%$i==0) {
@@ -23,21 +19,18 @@ function isPrime($input) {
 	}
 	return true;
 }
-
 function getFactors($input)
 {
 	global $factors,$factorsIndex;
 	$sq = sqrt($input);
 	for($i=2; $i <= $sq; $i++) {
 		if($input%$i==0) {
-			// echo $i," , ",$secondI,"\n";
 			if (!isPrime($i)) {
 				getFactors($i);
 			}
 			else if (!in_array($i,$factors)) {
 				$factors[$factorsIndex] = $i;
 				$factorsIndex++;
-				// echo $i,"\n";
 			}
 			$secondI = $input/$i;
 			if (!isPrime($secondI)) {
@@ -46,37 +39,37 @@ function getFactors($input)
 			else if (!in_array($secondI,$factors)) {
 				$factors[$factorsIndex] = $secondI;
 				$factorsIndex++;
-				// echo $secondI,"\n";
 			}
 			break;
 		}
 	}
 }
-
-
-
-$numPrimeFactors = 2;
+$numPrimeFactorsWanted = 4;
 $factors;
 $factorsIndex;
-for ($i=2; $i <= 20; $i++) { 
+for ($i=0; $i < $numPrimeFactorsWanted; $i++) { 
+	$resultsArray[$i] = 0;
+}
+$i=4;
+$finalResult = 0;
+while ($finalResult == 0) {
 	$factors = array();
 	$factorsIndex = 0;
 	getFactors($i);
-	// foreach ($factors as $key => $value) {
-	// 	if (isPrime($value)) {
-	// 		$numPrimeFactors++;
-	// 	}
-	// 	// echo $value,"\n";
-	// }
-	if ($numPrimeFactors == count($factors)) {
-		echo "=>",$i,"\n"; 
+	if ($numPrimeFactorsWanted == count($factors)) {
+		for ($j=0; $j < $numPrimeFactorsWanted-1; $j++) {  
+			$resultsArray[$j] = $resultsArray[$j+1];
+		}
+		$resultsArray[$numPrimeFactorsWanted-1] = $i;
+		if (($i-$resultsArray[0]) == ($numPrimeFactorsWanted-1)) {
+			$finalResult = $i-($numPrimeFactorsWanted-1);
+		}
 	}
-	// var_dump($factors);
-	// echo "====\n";
+	$i++;
 }
 
-$answer = 0;
+$answer = $finalResult;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 134043
+// Time: 1.8s
