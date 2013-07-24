@@ -41,59 +41,74 @@ for ($perNumI = 1; $perNumI <= 24; $perNumI++) {
 }
 $threePrimeResults = array();
 $threePrimeResultsIndex = 0;
-for ($a=1; $a <= 6; $a++) { 
-	for ($b=2; $b <= 7; $b++) { 
-		if ($b!=$a) {
-			for ($c=3; $c <= 8; $c++) {
-				if ($c!=$b && $c!=$a) {
-					for ($d=4; $d <= 9; $d++) {
-						if ($d!=$c && $d!=$b && $d!=$a) {
-							$mainIntStr = "".$a.$b.$c.$d;
-							$tempArray = array();
-							$tempArrayIndex = 0;
-							$isPrimeCount = 0;
-							if (isPrime(intval($mainIntStr))) {
-								for ($perNumI = 1; $perNumI <= 24; $perNumI++) {
-									for ($i=0; $i < 4; $i++) { 
-										$nums[$i] = $mainIntStr[$i];
-									}
-									$printout = "";
-									foreach ($resultTemplate[$perNumI] as $key => $value) {
-										$printout .= $nums[$value];
-										unset($nums[$value]);
-										$nums = array_values($nums);
-									}
-									if (isPrime(intval($printout))) {
-										$tempArray[$tempArrayIndex] = $printout;
-										$tempArrayIndex++;
-										$isPrimeCount++;
-									}
-								}
-							}
-							if ($isPrimeCount>3) {
-								$checker = 0;
-								for ($searchInt=0; $searchInt < count($threePrimeResults); $searchInt++) { 
-									if (in_array($tempArray[0],$threePrimeResults[$searchInt])) {
-										$checker++;
-										break;
-									}
-								}
-								if ($checker == 0) {
-									$threePrimeResults[$threePrimeResultsIndex] = $tempArray;
-									$threePrimeResultsIndex++;
-								}
-							}
-						}
-					}
+$finalResult = "";
+//check all 4 digit nums, add any 3+ number of prime comb into array
+for ($mainInt=1000; $mainInt <= 9999; $mainInt++) { 
+	$mainIntStr = "".$mainInt;
+	$tempArray = array();
+	$tempArrayIndex = 0;
+	if (isPrime($mainInt)) {
+		$isPrimeCount = 0;
+		for ($perNumI = 1; $perNumI <= 24; $perNumI++) {
+			for ($i=0; $i < 4; $i++) { 
+				$nums[$i] = $mainIntStr[$i];
+			}
+			$printout = "";
+			foreach ($resultTemplate[$perNumI] as $key => $value) {
+				$printout .= $nums[$value];
+				unset($nums[$value]);
+				$nums = array_values($nums);
+			}
+			if (isPrime(intval($printout)) && !in_array($printout, $tempArray)) {
+				$tempArray[$tempArrayIndex] = $printout;
+				$tempArrayIndex++;
+				$isPrimeCount++;
+			}
+		}
+		if ($isPrimeCount>3) {
+			$checker = 0;
+			for ($searchInt=0; $searchInt < count($threePrimeResults); $searchInt++) { 
+				if (in_array($tempArray[0],$threePrimeResults[$searchInt])) {
+					$checker++;
+					break;
+				}
+			}
+			if ($checker == 0) {
+				$threePrimeResults[$threePrimeResultsIndex] = $tempArray;
+				$threePrimeResultsIndex++;
+			}
+		}
+	}
+}
+//go through array and look for same difference between vars that is not a 1487 permutation
+for ($i=0; $i < count($threePrimeResults); $i++) {
+	$TPRLen = count($threePrimeResults[$i]);
+	for ($j=0; $j < $TPRLen; $j++) { 
+		for ($k=$j+1; $k < $TPRLen; $k++) {
+			if ($threePrimeResults[$i][$k] > $threePrimeResults[$i][$j]) {
+				$tempNum1 = $threePrimeResults[$i][$k] - $threePrimeResults[$i][$j];
+			}
+			else {
+				$tempNum1 = $threePrimeResults[$i][$j] - $threePrimeResults[$i][$k];
+			}
+			for ($l=$k+1; $l < $TPRLen; $l++) {
+				if ($threePrimeResults[$i][$k] > $threePrimeResults[$i][$l]) {
+					$tempNum2 = $threePrimeResults[$i][$k] - $threePrimeResults[$i][$l];
+				}
+				else {
+					$tempNum2 = $threePrimeResults[$i][$l] - $threePrimeResults[$i][$k];
+				}
+				$concatStr = ">".$threePrimeResults[$i][$j].$threePrimeResults[$i][$k].$threePrimeResults[$i][$l];
+				if ($tempNum1==$tempNum2 && !strpos("1487", $concatStr)) {
+					$finalResult = substr($concatStr,1);
 				}
 			}
 		}
 	}
 }
-var_dump($threePrimeResults);
 
-$answer = 0;
+$answer = $finalResult;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 296962999629
+// Time: 0.24s
