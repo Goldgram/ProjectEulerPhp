@@ -16,53 +16,29 @@ function isPrime($input) {
 	}
 	return true;
 }
-
+$num = 1;
+$sum = 2;
 $primesArray = array();
 $primesArray[0] = 2;
 $primesArrayIndex = 1;
-
-$num = 1;
-$sum = 2;
+//this is the value to get nearest, this is interchangable between integers
 $maxSum = 1000000;
 $closestDiff = $maxSum;
 $closestSum = 0;
-
-
-
-
-
-// $longestIndex;
+//make an array of all primes while their total sum is less than target int
 while ($sum < $maxSum) {
 	$num+=2;
 	if (isPrime($num))
 	{
-		// echo $sum,"\n";
-		// echo $num,"\n";
-		// echo $sum," => \n",numOfSums($sum),"\n==========\n";
-
 		$primesArray[$primesArrayIndex] = $num;
 		$primesArrayIndex++;
 		$sum += $num;
-		// if (isPrime($sum)) {
-		// 	$longestIndex = $primesArrayIndex + 1;
-		// }
 	}
 }
-// var_dump($longestIndex);
-// var_dump($primesArray);
-// var_dump($primesArrayIndex);
-// var_dump($sum);
-// echo "====\n";
-
-
-
+// start with matching two vals up to the full length of all the prime array
+//the closest difference sum gets kept if it's prime.
 for ($i=2; $i <= count($primesArray); $i++) {
-
-
-
-
 	for ($j=0; $j < count($primesArray)-$i+1; $j++) { 
-		
 		$sum = 0;
 		for ($k=$j; $k < ($j+$i); $k++) { 
 			$sum += $primesArray[$k];
@@ -70,28 +46,10 @@ for ($i=2; $i <= count($primesArray); $i++) {
 		if ($sum<$maxSum && ($maxSum-$sum)<$closestDiff){
 			if (isPrime($sum)) {
 				$closestSum = $sum;
-				// echo "sum: ",$sum," j: ",$i,"\n";
 			}
 		}
-	
-
-
-
 	}
-
-
-
-
-
-
 }
-
-var_dump($closestSum);
-
-
-
-
-
 
 $answer = $closestSum;
 $endTime = microtime(true);
