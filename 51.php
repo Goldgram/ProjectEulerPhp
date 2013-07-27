@@ -14,9 +14,41 @@ Find the smallest prime which, by replacing part of the number (not necessarily 
 
 // 	}
 // }
-for ($i="00"; $i != "20"; $i=bcadd($i,"01")) { 
-	echo $i,"\n";
+// for ($i="00"; $i != "20"; $i=bcadd($i,"01")) { 
+// 	echo $i,"\n";
+// }
+function isPrime($input) {
+	$sq = sqrt($input);
+	for ($i=2; $i <= $sq; $i++) {
+		if ($input%$i==0) {
+			return false;
+		}
+	}
+	return true;
 }
+// function numRepPrimes($input)
+// {
+// 	$inputStr = "".$input;
+// 	$inputStrLen = strlen($inputStr);
+
+// 	for ($i=1; $i <= $inputStrLen; $i++) {
+// 		for ($j=0; $j < $inputStrLen-$i+1; $j++) {
+// 			echo $inputStr,"\n";
+// 		}
+// 	}
+// }
+
+$rightDigit = array(1,3,7,9);
+for ($leftDigits=1; $leftDigits < 10; $leftDigits++) {
+	for ($rightDigitI=0; $rightDigitI < count($rightDigit); $rightDigitI++) { 
+		$numStr = $leftDigits.$rightDigit[$rightDigitI];
+		echo "=>",intval($numStr),"\n";
+		// numRepPrimes($i);
+		echo "----------------\n";
+	}
+}
+
+
 
 
 $answer = 0;
