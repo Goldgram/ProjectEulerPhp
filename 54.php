@@ -1058,6 +1058,8 @@ $hands = array(
 );
 
 $hands = array(
+	// array("2H","2C","2S","2S","AD","9C","TS","JS","QD","KD"),
+
 	array("5H","5C","6S","7S","KD","2C","3S","8S","8D","TD"),
 	array("5D","8C","9S","JS","AC","2C","5C","7D","8S","QH"),
 	array("2D","9C","AS","AH","AC","3D","6D","7D","TD","QD"),
@@ -1080,11 +1082,26 @@ function replaceCardLetters($input)
 		default: return intval($input);
 	}
 }
-
-function getTypeOfHand($PI)
+function handType($PI)
 {
-	for ($i=0; $i < 5; $i++) { 
-		$total += pow($PI[$i][0],$PI[$i][0]);
+	
+	return 2;
+}
+
+function getHandScore($PI)
+{
+	$total = 0;
+	$multiplier = 500000000000;
+	// if (condition) {
+	$total = bcadd($total,($multiplier*handType($PI)));
+	// $multiplier = bcmul($multiplier,10);
+	// }
+
+
+
+
+	for ($i=0; $i < count($PI); $i++) { 
+		$total = bcadd($total,bcpow($PI[$i][0],10));
 	}
 	return $total;
 }
@@ -1099,14 +1116,19 @@ for ($handNum=0; $handNum < count($hands); $handNum++) {
 			$P[$i][$j][1] = $hands[$handNum][$j+(5*$i)][1];
 		}
 	}
-	var_dump($P);
+	// var_dump($P);
 	for ($i=0; $i < 2; $i++) { 
-		echo getTypeOfHand($P[$i]),"\n";
+		echo getHandScore($P[$i]),"\n";
 	}
 
 
 
 	echo "============================\n";
+	// echo "",bcadd(bcpow(10,10),bcadd(bcadd(bcpow(14,10),bcpow(13,10)),bcadd(bcpow(12,10),bcpow(11,10)))),"\n";
+	// echo "",bcpow(50,7),"\n";
+	// echo "",500000000000,"\n";
+
+		// +bcpow(13,13)+bcpow(12,12)+bcpow(11,11)+bcpow(10,10));
 	break;
 
 }
