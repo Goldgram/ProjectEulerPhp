@@ -1069,26 +1069,46 @@ $hands = array(
 // $P1 = array();
 // $P2 = array();
 
-for ($handNum=0; $handNum < count($hands); $handNum++) { 
-	// echo $hands[$handNum][0],"\n";
-	
-	// $P2 = array_slice($hands[$handNum], 5, 5);
-	// var_dump($P1);
-	// var_dump($P2);
-	// for ($i=0; $i < 2; $i++) { 
+function replaceCardLetters($input)
+{
+	switch ($input) {
+		case "T": return 10;
+		case "J": return 11;
+		case "Q": return 12;
+		case "K": return 13;
+		case "A": return 14;
+		default: return intval($input);
+	}
+}
+
+function getTypeOfHand($PI)
+{
 	for ($i=0; $i < 5; $i++) { 
-		$P[0][$i][0] = $hands[$handNum][$i][0];
-		$P[0][$i][1] = $hands[$handNum][$i][1];
+		$total += pow($PI[$i][0],$PI[$i][0]);
 	}
-	for ($i=5; $i < 10; $i++) { 
-		$P[1][$i][0] = $hands[$handNum][$i][0];
-		$P[1][$i][1] = $hands[$handNum][$i][1];
+	return $total;
+}
+
+
+
+for ($handNum=0; $handNum < count($hands); $handNum++) { 
+	// set up $P with [0] as player 1 and [1] as player 2 
+	for ($i=0; $i < 2; $i++) { 
+		for ($j=0; $j < 5; $j++) { 
+			$P[$i][$j][0] = replaceCardLetters($hands[$handNum][$j+(5*$i)][0]);
+			$P[$i][$j][1] = $hands[$handNum][$j+(5*$i)][1];
+		}
 	}
-	// }
 	var_dump($P);
-	// break;
+	for ($i=0; $i < 2; $i++) { 
+		echo getTypeOfHand($P[$i]),"\n";
+	}
+
+
+
 	echo "============================\n";
-	// $value = array_shift( $foo );
+	break;
+
 }
 
 
