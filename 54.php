@@ -1084,24 +1084,22 @@ function replaceCardLetters($input)
 }
 function handType($PI)
 {
-	
-	return 2;
+	// unset($PI[0]);
+	$PI["level"] = 1;
+	$PI["cardVal"] = 2;
+	return $PI;
 }
 
 function getHandScore($PI)
 {
 	$total = 0;
 	$multiplier = 500000000000;
-	// if (condition) {
-	$total = bcadd($total,($multiplier*handType($PI)));
-	// $multiplier = bcmul($multiplier,10);
-	// }
 
+	$newPI = handType($PI);
+	$total = bcadd($total,(bcmul($multiplier,$newPI["level"])*$newPI["cardVal"]));
 
-
-
-	for ($i=0; $i < count($PI); $i++) { 
-		$total = bcadd($total,bcpow($PI[$i][0],10));
+	for ($i=0; $i < count($newPI); $i++) { 
+		$total = bcadd($total,bcpow($newPI[$i][0],10));
 	}
 	return $total;
 }
