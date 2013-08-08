@@ -1112,7 +1112,7 @@ function handType($PI)
 	return $PI;
 }
 
-function getHandScore($PI)
+function getHandScore($PI) //do i really need this???
 {
 	$total = 0;
 	$multiplier = 500000000000;
