@@ -1084,6 +1084,33 @@ function replaceCardLetters($input)
 }
 function handType($PI)
 {
+	$flush = false;
+	$consecVals = false;
+
+
+	if (count(array_unique($PI[1])) == 1 ) {
+		$flush = true;
+	}
+
+	$minCard = min($PI[0]);
+	if (in_array($minCard+1,$PI[0])
+		&& in_array($minCard+2,$PI[0])
+		&& in_array($minCard+3,$PI[0])
+		&& in_array($minCard+4,$PI[0])
+			) {
+		$consecVals = true;
+	}
+	
+
+
+	if ($flush &&	$consecVals && in_array(14,$PI[0])
+			) {
+		$PI["level"] = 10;
+		$PI["cardVal"] = 14;
+	}
+	else if () {
+
+	}
 	// unset($PI[0]);
 	$PI["level"] = 1;
 	$PI["cardVal"] = 2;
@@ -1099,7 +1126,7 @@ function getHandScore($PI)
 	$total = bcadd($total,(bcmul($multiplier,$newPI["level"])*$newPI["cardVal"]));
 
 	for ($i=0; $i < count($newPI); $i++) { 
-		$total = bcadd($total,bcpow($newPI[$i][0],10));
+		$total = bcadd($total,bcpow($newPI[0][$i],10));
 	}
 	return $total;
 }
@@ -1110,8 +1137,8 @@ for ($handNum=0; $handNum < count($hands); $handNum++) {
 	// set up $P with [0] as player 1 and [1] as player 2 
 	for ($i=0; $i < 2; $i++) { 
 		for ($j=0; $j < 5; $j++) { 
-			$P[$i][$j][0] = replaceCardLetters($hands[$handNum][$j+(5*$i)][0]);
-			$P[$i][$j][1] = $hands[$handNum][$j+(5*$i)][1];
+			$P[$i][0][$j] = replaceCardLetters($hands[$handNum][$j+(5*$i)][0]);
+			$P[$i][1][$j] = $hands[$handNum][$j+(5*$i)][1];
 		}
 	}
 	// var_dump($P);
