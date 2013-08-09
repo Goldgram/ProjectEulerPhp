@@ -1078,10 +1078,12 @@ function handType($PI)
 
 	//to see the pair and what 
 	for ($i=4; $i >= 2; $i--) {
-		
 		for ($j=0; $j <= (5-$i); $j++) { 
-			
-		
+			if (array_unique(array_slice($PI[0],$j,($j+$i-1))) == 1)
+			{
+				echo $PI[0][$j]," => ",$i,"\n";
+				break;
+			}
 		}
 	}
 	
