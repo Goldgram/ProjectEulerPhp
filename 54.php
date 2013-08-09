@@ -1065,12 +1065,13 @@ function handType($PI)
 	$flush = false;
 	$consecVals = false;
 
+	$minCard = min($PI[0]);
+	$maxCard = max($PI[0]);
 
 	if (count(array_unique($PI[1])) == 1 ) {
 		$flush = true;
 	}
 
-	$minCard = min($PI[0]);
 	if (in_array($minCard+1,$PI[0])
 		&& in_array($minCard+2,$PI[0])
 		&& in_array($minCard+3,$PI[0])
@@ -1078,20 +1079,63 @@ function handType($PI)
 			) {
 		$consecVals = true;
 	}
+
+	//to see the pair and what 
+	for ($i=4; $i >= 2; $i--) {
+		
+		for ($j=0; $j <= (5-$i); $j++) { 
+			
+		
+		}
+	}
 	
 
-
+	// Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
 	if ($flush &&	$consecVals && in_array(14,$PI[0])
 			) {
 		$PI["level"] = 10;
 		$PI["cardVal"] = 14;
 	}
-	else if () {
-
+	// Straight Flush: All cards are consecutive values of same suit.
+	else if ($flush && $consecVals) {
+		$PI["level"] = 9;
+		$PI["cardVal"] = $maxCard;
 	}
-	// unset($PI[0]);
-	$PI["level"] = 1;
-	$PI["cardVal"] = 2;
+	// Four of a Kind: Four cards of the same value.
+	// else if () {
+
+	// }
+	// Full House: Three of a kind and a pair.
+	// else if () {
+		
+	// }
+	// Flush: All cards of the same suit.
+	// else if () {
+		
+	// }
+	// Straight: All cards are consecutive values.
+	// else if () {
+		
+	// }
+	// Three of a Kind: Three cards of the same value.
+	// else if () {
+		
+	// }
+	// Two Pairs: Two different pairs.
+	// else if () {
+		
+	// }
+	// One Pair: Two cards of the same value.
+	// else if () {
+		
+	// }
+	// High Card: Highest value card.
+	else {
+		$PI["level"] = 1;
+		$PI["cardVal"] = $maxCard;
+	}
+
+
 	return $PI;
 }
 
