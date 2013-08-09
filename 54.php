@@ -1045,10 +1045,6 @@ $hands = array(
 	array("2H","2D","4C","4D","4S","3C","3D","3S","9S","9D")
 );
 
-
-// $P1 = array();
-// $P2 = array();
-
 function replaceCardLetters($input)
 {
 	switch ($input) {
