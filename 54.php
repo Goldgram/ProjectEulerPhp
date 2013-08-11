@@ -1035,15 +1035,32 @@ $hands = array(
 	array("AS","KD","3D","JD","8H","7C","8C","5C","QD","6C")
 );
 
-$hands = array(
-	// array("2H","2C","2S","2S","AD","9C","TS","JS","QD","KD"),
+// $hands = array(
+// 	// array("2H","2C","2S","2S","AD","9C","TS","JS","QD","KD"),
 
-	array("5H","5C","6S","7S","KD","2C","3S","8S","8D","TD"),
-	array("5D","8C","9S","JS","AC","2C","5C","7D","8S","QH"),
-	array("2D","9C","AS","AH","AC","3D","6D","7D","TD","QD"),
-	array("4D","6S","9H","QH","QC","3D","6D","7H","QD","QS"),
-	array("2H","2D","4C","4D","4S","3C","3D","3S","9S","9D")
-);
+// 	array("5H","5C","6S","7S","KD","2C","3S","8S","8D","TD"),
+// 	array("5D","8C","9S","JS","AC","2C","5C","7D","8S","QH"),
+// 	array("2D","9C","AS","AH","AC","3D","6D","7D","TD","QD"),
+// 	array("4D","6S","9H","QH","QC","3D","6D","7H","QD","QS"),
+// 	array("2H","2D","4C","4D","4S","3C","3D","3S","9S","9D")
+// );
+// $hands = array(
+// 	array("8C","TS","KC","9H","4S","7D","2S","5D","3S","AC"),
+// 	array("5C","AD","5D","AC","9C","7C","5H","8D","TD","KS"),
+// 	array("3H","7H","6S","KC","JS","QH","TD","JC","2D","8S"),
+// 	array("TH","8H","5C","QS","TC","9H","4D","JC","KS","JS"),
+// 	array("7C","5H","KC","QH","JD","AS","KH","4C","AD","4S"),
+// 	array("5H","KS","9C","7D","9H","8D","3S","5D","5C","AH"),
+// 	array("6H","4H","5C","3H","2H","3S","QH","5S","6S","AS"),
+// 	array("TD","8C","4H","7C","TC","KC","4C","3H","7S","KS"),
+// 	array("7C","9C","6D","KD","3H","4C","QS","QC","AC","KH"),
+// 	array("JC","6S","5H","2H","2D","KD","9D","7C","AS","JS"),
+// 	array("AD","QH","TH","9D","8H","TS","6D","3S","AS","AC"),
+// 	array("2H","4S","5C","5S","TC","KC","JD","6C","TS","3C"),
+// 	array("QD","AS","6H","JS","2C","3D","9H","KC","4H","8S"),
+// 	array("KD","8S","9S","7C","2S","3S","6D","6S","4H","KC"),
+// 	array("3C","8C","2D","7D","4D","9S","4S","QH","4H","JD")
+// );
 
 function replaceCardLetters($input)
 {
@@ -1056,10 +1073,16 @@ function replaceCardLetters($input)
 		default: return intval($input);
 	}
 }
-function handType($PI)
+function handValue($PI)
 {
+	$total = 0;
 	$flush = false;
 	$consecVals = false;
+	$pair1Type = 0;
+	$pair1Num = 0;
+	$pair2Type = 0;
+	$pair2Num = 0;
+	sort($PI[0]);
 
 	$minCard = min($PI[0]);
 	$maxCard = max($PI[0]);
@@ -1075,84 +1098,151 @@ function handType($PI)
 			) {
 		$consecVals = true;
 	}
+	// var_dump($PI[0]);
+
+
+
 
 	//to see the pair and what 
 	for ($i=4; $i >= 2; $i--) {
 		for ($j=0; $j <= (5-$i); $j++) { 
-			if (array_unique(array_slice($PI[0],$j,($j+$i-1))) == 1)
+			if (count(array_unique(array_slice($PI[0],$j,$i))) == 1)
 			{
-				echo $PI[0][$j]," => ",$i,"\n";
-				break;
+				// var_dump(array_slice($PI[0],$j,$i));
+				// var_dump($PI[0]);
+				// if (condition) {
+				// 	# code...
+				// }
+				if ($pair1Type==0) {
+					// echo $PI[0][$j]," =>1 ",$i,"\n";
+					$pair1Type = $i;
+					$pair1Num = $PI[0][$j];
+					for ($k=$j; $k < ($j+$i); $k++) {
+						// unset($PI[0][$k]);
+						$PI[0][$k] = 0;
+					}
+					// var_dump($PI[0]);
+				} else if ($PI[0][$j]>0) {
+
+					// echo $PI[0][$j]," =>2 ",$i,"\n";
+					$pair2Type = $i;
+					$pair2Num = $PI[0][$j];
+					for ($k=$j; $k < ($j+$i); $k++) { 
+						// echo "-",$PI[0][$k],"\n";
+						// unset($PI[0][$k]);
+						$PI[0][$k] = 0;
+					}
+					// var_dump($PI[0]);
+				}
+				// break 2;
+
 			}
 		}
 	}
-	
+	$maxCardPairs = max($PI[0]);
+	// var_dump($maxCardPairs);
 
 	// Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
 	if ($flush &&	$consecVals && in_array(14,$PI[0])
 			) {
-		$PI["level"] = 10;
-		$PI["cardVal"] = 14;
+		// $PI["level"] = 10;
+		// $PI["cardVal"] = 14;
+		$total += 140000000000;
 	}
 	// Straight Flush: All cards are consecutive values of same suit.
 	else if ($flush && $consecVals) {
-		$PI["level"] = 9;
-		$PI["cardVal"] = $maxCard;
+		// $PI["level"] = 9;
+		// $PI["cardVal"] = $maxCard;
+		$total += 1000000000*$maxCard;
 	}
 	// Four of a Kind: Four cards of the same value.
-	// else if () {
-
-	// }
+	else if ($pair1Type == 4) {
+		// $PI["level"] = 8;
+		// $PI["cardVal"] = $maxCard;
+		$total += 100000000*$pair1Num;
+		$total += $maxCardPairs;
+	}
 	// Full House: Three of a kind and a pair.
-	// else if () {
-		
-	// }
+	else if ($pair1Type == 3 && $pair2Type == 2) {
+		// $PI["level"] = 7;
+		// $PI["cardVal"] = $maxCard;
+		$total += 10000000*$pair1Num;
+		$total += 1000000*$pair2Num;
+		$total += $maxCardPairs;
+	}
 	// Flush: All cards of the same suit.
-	// else if () {
-		
-	// }
+	else if ($flush) {
+		// $PI["level"] = 6;
+		// $PI["cardVal"] = $maxCard;
+		$total += 1000000*$maxCard;
+	}
 	// Straight: All cards are consecutive values.
-	// else if () {
-		
-	// }
+	else if ($consecVals) {
+		// $PI["level"] = 5;
+		// $PI["cardVal"] = $maxCard;
+		$total += 100000*$maxCard;
+	}
 	// Three of a Kind: Three cards of the same value.
-	// else if () {
-		
-	// }
+	else if ($pair1Type == 3) {
+		// $PI["level"] = 4;
+		// $PI["cardVal"] = $maxCard;
+		$total += 10000*$pair1Num;
+		$total += $maxCardPairs;
+	}
 	// Two Pairs: Two different pairs.
-	// else if () {
-		
-	// }
+	else if ($pair1Type == 2 && $pair2Type == 2) {
+		// $PI["level"] = 3;
+		// $PI["cardVal"] = $maxCard;
+		$total += 1000*$pair1Num;
+		$total += 100*$pair2Num;
+		$total += $maxCardPairs;
+	}
 	// One Pair: Two cards of the same value.
-	// else if () {
-		
-	// }
+	else if ($pair1Type == 2) {
+		// $PI["level"] = 2;
+		// $PI["cardVal"] = $maxCard;
+		$total += 10*$pair1Num;
+		$total += $maxCardPairs;
+	}
 	// High Card: Highest value card.
 	else {
-		$PI["level"] = 1;
-		$PI["cardVal"] = $maxCard;
+		// $PI["level"] = 1;
+		// $PI["cardVal"] = $maxCard;
+		$total += $maxCardPairs;
 	}
 
 
-	return $PI;
-}
-
-function getHandScore($PI) //do i really need this???
-{
-	$total = 0;
-	$multiplier = 500000000000;
-
-	$newPI = handType($PI);
-	$total = bcadd($total,(bcmul($multiplier,$newPI["level"])*$newPI["cardVal"]));
-
-	for ($i=0; $i < count($newPI); $i++) { 
-		$total = bcadd($total,bcpow($newPI[0][$i],10));
-	}
 	return $total;
 }
 
+// function getHandScore($PI) //do i really need this???
+// {
+// 	$total = 0;
+// 	$multiplier = 500000000000;
+
+// 	$newPI = handType($PI);
+// 	$total = bcadd($total,(bcmul($multiplier,$newPI["level"])*$newPI["cardVal"]));
+
+// 	// for ($i=0; $i < count($newPI); $i++) { 
+// 	// 	$total = bcadd($total,bcpow($newPI[0][$i],10));
+// 	// }
+// 	foreach ($newPI as $key => $value) {
+// 		if (isset($newPI[0][$key])) {
+// 			$total = bcadd($total,bcpow($newPI[0][$key],10));
+// 		}
+// 	}
 
 
+
+
+
+
+
+// 	return $total;
+// }
+
+
+$count =0;
 for ($handNum=0; $handNum < count($hands); $handNum++) { 
 	// set up $P with [0] as player 1 and [1] as player 2 
 	for ($i=0; $i < 2; $i++) { 
@@ -1163,18 +1253,28 @@ for ($handNum=0; $handNum < count($hands); $handNum++) {
 	}
 	// var_dump($P);
 	for ($i=0; $i < 2; $i++) { 
-		echo getHandScore($P[$i]),"\n";
+		// echo handValue($P[$i]),"\n";
+		$player[$i] = handValue($P[$i]);;
 	}
+	// echo "Player 1: ",$player[0],"\n";
+	// echo "Player 2: ",$player[1],"\n";
+	if ($player[0]>$player[1]) {
+		// echo "Player 1 Wins\n";
+		$count++;
+	} 
+	// else {
+	// 	echo "Player 2 Wins\n";
+	// }
 
 
 
-	echo "============================\n";
+	// echo "============================\n";
 	// echo "",bcadd(bcpow(10,10),bcadd(bcadd(bcpow(14,10),bcpow(13,10)),bcadd(bcpow(12,10),bcpow(11,10)))),"\n";
 	// echo "",bcpow(50,7),"\n";
 	// echo "",500000000000,"\n";
 
 		// +bcpow(13,13)+bcpow(12,12)+bcpow(11,11)+bcpow(10,10));
-	break;
+	// break;
 
 }
 
@@ -1182,8 +1282,8 @@ for ($handNum=0; $handNum < count($hands); $handNum++) {
 
 
 
-$answer = 0;
+$answer = $count;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 376
+// Time: 0.095s
