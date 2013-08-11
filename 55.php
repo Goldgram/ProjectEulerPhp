@@ -12,22 +12,24 @@ NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretica
 -->
 <?php $startTime = microtime(true);
 
-function isPalindromic($input)
-{
-	$inputStr = "".$input;
-	if ($inputStr == strrev($inputStr)){
-		return true;
+$count = 0;
+for ($i=1; $i < 10000; $i++) { 
+	$iSum = "".$i;
+	$lychrel = true;
+	for ($j=0; $j < 50; $j++) { 
+		$iSum = bcadd($iSum,strrev($iSum));
+		if ($iSum == strrev($iSum)) {
+			$lychrel = false;
+			break;
+		}
 	}
-	return false;
-}
-for ($i=11; $i < 1000; $i++) { 
-	if (isPalindromic($i)) {
-		echo $i,"\n";
+	if ($lychrel) {
+		$count++;
 	}
 }
 
-$answer = 0;
+$answer = $count;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 249
+// Time: 0.11s
