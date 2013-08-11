@@ -12,7 +12,19 @@ NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretica
 -->
 <?php $startTime = microtime(true);
 
-
+function isPalindromic($input)
+{
+	$inputStr = "".$input;
+	if ($inputStr == strrev($inputStr)){
+		return true;
+	}
+	return false;
+}
+for ($i=11; $i < 1000; $i++) { 
+	if (isPalindromic($i)) {
+		echo $i,"\n";
+	}
+}
 
 $answer = 0;
 $endTime = microtime(true);
