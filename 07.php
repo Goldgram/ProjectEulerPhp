@@ -6,7 +6,6 @@ What is the 10 001st prime number?
 //simple prime varifier
 function isPrime($input)
 {
-	//$coin = 1;
 	$sq = sqrt($input);
 	for ($i=2; $i <= $sq; $i++) {
 		if ($input%$i==0) {
