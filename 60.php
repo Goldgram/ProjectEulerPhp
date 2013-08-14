@@ -4,8 +4,7 @@ Find the lowest sum for a set of five primes for which any two primes concatenat
 -->
 <?php $startTime = microtime(true);
 
-function isPrime($input)
-{
+function isPrime($input) {
 	$sq = sqrt($input);
 	for ($i=2; $i <= $sq; $i++) {
 		if ($input%$i==0) {
@@ -14,8 +13,7 @@ function isPrime($input)
 	}
 	return true;
 }
-function isMultiplePrimes($inputArray)
-{
+function isMultiplePrimes($inputArray) {
 	$sq = sqrt(max($inputArray));
 	for ($i=2; $i <= $sq; $i++) {
 		foreach ($inputArray as $value) {
@@ -26,58 +24,38 @@ function isMultiplePrimes($inputArray)
 	}
 	return true;
 }
-
-$primesArray = array();
-$primesArray[0] = 2;
-$primesArrayIndex = 1;
-
+$primes = array();
+$primesIndex = 0;
 $num = 3;
-while ($num<10000) {
+while ($num<8500) {//arbitrarily incremented until produced result 
 	if (isPrime($num)) {
-		$primesArray[$primesArrayIndex] = $num;
-		$primesArrayIndex++;
+		$primes[$primesIndex] = $num;
+		$primesIndex++;
 	}
 	$num+=2;
 }
-
-// echo isMultiplePrimes(array(3)),"\n";
-// echo isMultiplePrimes(array(4)),"\n";
-// echo isMultiplePrimes(array(2,7)),"\n";
-// echo isMultiplePrimes(array(2,9,11)),"\n";
-// echo isMultiplePrimes(array(2,7,11)),"\n";
-// echo isMultiplePrimes(array(2,7,14)),"\n";
-
-// if (isMultiplePrimes(array(2,7,11))) {
-// // if (isPrime(2)&&isPrime(7)&&isPrime(11)) {
-// 	echo "OK\n";
-// }
-
-
-// var_dump($primesArray);
-$primesArrayCount = count($primesArray);
-for ($a=0; $a < $primesArrayCount; $a++) {
-	for ($b=$a+1; $b < $primesArrayCount; $b++) {
-		if (isMultiplePrimes(array(intval($primesArray[$a].$primesArray[$b]),intval($primesArray[$b].$primesArray[$a])))
+$primesCount = count($primes);
+for ($a=0; $a < $primesCount; $a++) {
+	for ($b=$a+1; $b < $primesCount; $b++) {
+		if (isMultiplePrimes(array(intval($primes[$a].$primes[$b]),intval($primes[$b].$primes[$a])))
 			) {
-			// echo $primesArray[$a]," ",$primesArray[$b],"\n";
-			for ($c=$b+1; $c < $primesArrayCount; $c++) {
-				if (isMultiplePrimes(array(intval($primesArray[$a].$primesArray[$c]),intval($primesArray[$c].$primesArray[$a])
-																	,intval($primesArray[$b].$primesArray[$c]),intval($primesArray[$c].$primesArray[$b])))
+			for ($c=$b+1; $c < $primesCount; $c++) {
+				if (isMultiplePrimes(array(intval($primes[$a].$primes[$c]),intval($primes[$c].$primes[$a])
+																	,intval($primes[$b].$primes[$c]),intval($primes[$c].$primes[$b])))
 			 		) {
-					for ($d=$c+1; $d < $primesArrayCount; $d++) {
-						if (isMultiplePrimes(array(intval($primesArray[$a].$primesArray[$d]),intval($primesArray[$d].$primesArray[$a])
-																			,intval($primesArray[$b].$primesArray[$d]),intval($primesArray[$d].$primesArray[$b])
-																			,intval($primesArray[$c].$primesArray[$d]),intval($primesArray[$d].$primesArray[$c])))
+					for ($d=$c+1; $d < $primesCount; $d++) {
+						if (isMultiplePrimes(array(intval($primes[$a].$primes[$d]),intval($primes[$d].$primes[$a])
+																			,intval($primes[$b].$primes[$d]),intval($primes[$d].$primes[$b])
+																			,intval($primes[$c].$primes[$d]),intval($primes[$d].$primes[$c])))
 							) {
-							for ($e=$d+1; $e < $primesArrayCount; $e++) {
-								if (isMultiplePrimes(array(intval($primesArray[$a].$primesArray[$e]),intval($primesArray[$e].$primesArray[$a])
-																					,intval($primesArray[$b].$primesArray[$e]),intval($primesArray[$e].$primesArray[$b])
-																					,intval($primesArray[$b].$primesArray[$e]),intval($primesArray[$e].$primesArray[$b])
-																					,intval($primesArray[$c].$primesArray[$e]),intval($primesArray[$e].$primesArray[$c])
-																					,intval($primesArray[$d].$primesArray[$e]),intval($primesArray[$e].$primesArray[$d])))
+							for ($e=$d+1; $e < $primesCount; $e++) {
+								if (isMultiplePrimes(array(intval($primes[$a].$primes[$e]),intval($primes[$e].$primes[$a])
+																					,intval($primes[$b].$primes[$e]),intval($primes[$e].$primes[$b])
+																					,intval($primes[$b].$primes[$e]),intval($primes[$e].$primes[$b])
+																					,intval($primes[$c].$primes[$e]),intval($primes[$e].$primes[$c])
+																					,intval($primes[$d].$primes[$e]),intval($primes[$e].$primes[$d])))
 				 						) {
-									echo $primesArray[$a]," ",$primesArray[$b]," ",$primesArray[$c]," ",$primesArray[$d]," ",$primesArray[$e]," = ";
-									echo $primesArray[$a]+$primesArray[$b]+$primesArray[$c]+$primesArray[$d]+$primesArray[$e],"\n";
+									$sumOfResultingPrimes = $primes[$a]+$primes[$b]+$primes[$c]+$primes[$d]+$primes[$e];
 									break 5;
 								}
 							}
@@ -92,8 +70,8 @@ for ($a=0; $a < $primesArrayCount; $a++) {
 
 
 
-$answer = 0;
+$answer = $sumOfResultingPrimes;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 26033
-// Time: 29s needs refactoring
+// Time: 8.9s
