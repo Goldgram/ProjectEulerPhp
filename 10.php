@@ -1,9 +1,11 @@
 <?php $startTime = microtime(true);
 
-function isPrime($input)
-{
+function isPrime($input) {
 	$sq = sqrt($input);
-	for ($i=2; $i <= $sq; $i++) {
+	if ($input%2==0) {
+		return false;
+	}
+	for ($i=3; $i <= $sq; $i+=2) {
 		if ($input%$i==0) {
 			return false;
 		}
