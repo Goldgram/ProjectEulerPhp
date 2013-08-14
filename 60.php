@@ -6,7 +6,10 @@ Find the lowest sum for a set of five primes for which any two primes concatenat
 
 function isPrime($input) {
 	$sq = sqrt($input);
-	for ($i=2; $i <= $sq; $i++) {
+	if ($input%2==0) {
+		return false;
+	}
+	for ($i=3; $i <= $sq; $i+=2) {
 		if ($input%$i==0) {
 			return false;
 		}
@@ -15,7 +18,12 @@ function isPrime($input) {
 }
 function isMultiplePrimes($inputArray) {
 	$sq = sqrt(max($inputArray));
-	for ($i=2; $i <= $sq; $i++) {
+	foreach ($inputArray as $value) {
+		if ($value%2==0) {
+			return false;
+		}
+	}
+	for ($i=3; $i <= $sq; $i+=2) {
 		foreach ($inputArray as $value) {
 			if ($value%$i==0) {
 				return false;
@@ -74,4 +82,4 @@ $answer = $sumOfResultingPrimes;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 26033
-// Time: 8.9s
+// Time: 6.09s
