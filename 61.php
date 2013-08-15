@@ -25,115 +25,60 @@ function isPolygon($numOfSides,$inputNum){
 	}
 	return false;
 }
-
-// for ($i=1; $i < 16; $i++) { 
-// 	// echo getPolygon(8,$i),"\n";
-// 	echo $i," => ",isPolygon(3,$i),"\n";
-// }
-for ($a=11; $a < 100; $a++) {
-	
-	for ($b=$a+1; $b < 100; $b++) {
-		for ($c=$b+1; $c < 100; $c++) {
-			for ($d=$c+1; $d < 100; $d++) {
-				for ($e=$d+1; $e < 100; $e++) {
-					for ($f=$e+1; $f < 100; $f++) {
-						// echo $a," ",$b," ",$c," ",$d," ",$e," ",$f,"\n";
-					}
-				}
-			}
+function isMultiplePolygon($inputNum) {
+	for ($i=3; $i <= 8; $i++) { 
+		if (isPolygon($i,$inputNum)) {
+			return true;
 		}
 	}
-	echo $a,"\n";
+	return false;
+}
+function isOneOfEachPolygon($inputArray) {
+
+	// for ($i=3; $i <= 8; $i++) { 
+	// 	if (isPolygon($i,$inputNum)) {
+	// 		return true;
+	// 	}
+	// }
+	// return false;
 }
 
 
 
 
-// function getTriangle($input){
-// 	return ($input*($input+1))/2;
-// }
-// function getSquare($input){
-// 	return $input*$input;
-// }
-// function getPentagonal($input){
-// 	return ($input*((3*$input)-1))/2;
-// }
-// function getHexagonal($input){
-// 	return $input*((2*$input)-1);
-// }
-// function getHeptagonal($input){
-// 	return ($input*((5*$input)-3))/2;
-// }
-// function getOctagonal($input){
-// 	return $input*((3*$input)-2);
-// }
+
+
+for ($a=11; $a <= 99; $a++) {
+	for ($b=11; $b <= 99; $b++) {
+		if (isMultiplePolygon(intval($a.$b))) {
+			for ($c=11; $c <= 99; $c++) {
+				if (isMultiplePolygon(intval($b.$c))) {
+					for ($d=11; $d <= 99; $d++) {
+						if (isMultiplePolygon(intval($c.$d))) {
+							for ($e=11; $e <= 99; $e++) {
+								if (isMultiplePolygon(intval($d.$e))) {
+									for ($f=11; $f <= 99; $f++) {
+										if (isMultiplePolygon(intval($e.$f))
+											&& isMultiplePolygon(intval($f.$a))
+											) {
+										// if (isOneOfEachPolygon(array($a,$b,$c,$d,$e,$f))
+											// ) {
+											echo $a," ",$b," ",$c," ",$d," ",$e," ",$f,"\n";
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	// echo "A: ",$a,"\n";
+}
 
 
 
-// function isTriangle($input){
-// 	$number = (sqrt((8*$input)+1)-1)/2;
-// 	if (floor($number) == $number)
-// 	{
-// 		return true;
-// 	}
-// 	return false;
-// }
-// function isSquare($input){
-// 	$number = (sqrt((8*$input)+1)-1)/2;
-// 	if (floor($number) == $number)
-// 	{
-// 		return true;
-// 	}
-// 	return false;
-// }
-// function isPentagonal($input){
-// 	$number = (sqrt((24*$input)+1)+1)/6;
-// 	if (floor($number) == $number)
-// 	{
-// 		return true;
-// 	}
-// 	return false;
-// }
-
-// function isHexagonal($input){
-// 	$number = (sqrt((8*$input)+1)+1)/4;
-// 	if (floor($number) == $number)
-// 	{
-// 		return true;
-// 	}
-// 	return false;
-// }
-// function isHeptagonal($input){
-// 	$number = (sqrt((24*$input)+1)+1)/6;
-// 	if (floor($number) == $number)
-// 	{
-// 		return true;
-// 	}
-// 	return false;
-// }
-
-
-// $currentA = 0;
-// $currentB = 0;
-// for ($a=1; getTriangle($a) < 10000; $a++) {
-// 	// $currentA = getTriangle($a);
-// 	for ($b=1; getSquare($b) < 10000; $b++) {
-// 		// $currentB = getSquare($b);
-// 		for ($c=1; getSquare($c) < 10000; $c++) {
-// 			for ($d=1; getSquare($d) < 10000; $d++) {
-// 				for ($e=1; getSquare($e) < 10000; $e++) {
-// 					for ($f=1; getSquare($f) < 10000; $f++) {
-// 						// echo getTriangle($a)," ",getSquare($b)," ",getSquare($c)," ",getSquare($d)," ",getSquare($e)," ",getSquare($f),"\n";
-// 						if ($a<1) {
-// 							break 6;
-// 						}
-
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// }
 
 
 
