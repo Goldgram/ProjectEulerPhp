@@ -14,9 +14,67 @@ Find the sum of the only ordered set of six cyclic 4-digit numbers for which eac
 -->
 <?php $startTime = microtime(true);
 
-function getPolygon($numOfSides,$inputNum){
-	return (($inputNum*$inputNum*($numOfSides-2))-($inputNum*($numOfSides-4)))/2;
-}
+// function getFactorial($inputNum)
+// {
+// 	$total = 1;
+// 	for ($i=$inputNum; $i > 1; $i--) { 
+// 		$total *= $i;
+// 	}
+// 	return $total;
+// }
+// //setup the index values for 6 digit permutation (6!)
+// $upTo = 6;
+// $upToResultNum = getFactorial($upTo);
+// for ($perNumI = 1; $perNumI <= $upToResultNum; $perNumI++) { 
+// 	$perNum = $perNumI;
+// 	for ($numIndex=0; $numIndex < $upTo; $numIndex++) { 
+// 		$currentResult = 0;
+// 		$combsLeft = getFactorial($upTo - 1 - $numIndex);
+// 		for ($i=0; $i < ($upTo - $numIndex); $i++) { 
+// 			$upToPosib = $i * $combsLeft;
+// 			if ($upToPosib < $perNum) {
+// 				$currentUpToPosib = $upToPosib;
+// 				$currentResult = $i;
+// 			}
+// 		}
+// 		$resultTemplate[$perNumI][$numIndex] = $currentResult;
+// 		$perNum -= $currentUpToPosib;
+// 	}
+// }
+
+
+// $nums = array();
+// $nums[0] = "3";
+// $nums[1] = "4";
+// $nums[2] = "5";
+// $nums[3] = "6";
+// $nums[4] = "7";
+// $nums[5] = "8";
+
+
+// for ($i=1; $i < count($resultTemplate); $i++) { 
+// 	// $nums = $resultTemplate[$i];
+// 	$printout = "";
+// 	for ($j=0; $j < count($nums); $j++) { 
+// 		$resultIndex = $result[$j];
+// 		$count = 0;
+// 		foreach ($nums as $key => $value) {
+// 			if ($resultIndex==$count) {
+// 				$printout .= $value;
+// 				unset($nums[$value]);
+// 			}
+// 			$count++;
+// 		}
+// 	}
+// 	echo $printout,"\n";
+// }
+
+
+
+// var_dump($resultTemplate);
+// function getPolygon($numOfSides,$inputNum){
+// 	return (($inputNum*$inputNum*($numOfSides-2))-($inputNum*($numOfSides-4)))/2;
+// }
 function isPolygon($numOfSides,$inputNum){
 	$number = (sqrt((((8*$numOfSides)-16)*$inputNum)+(($numOfSides-4)*($numOfSides-4)))+$numOfSides-4)/((2*$numOfSides)-4);
 	if (floor($number) == $number)
@@ -33,37 +91,63 @@ function isMultiplePolygon($inputNum) {
 	}
 	return false;
 }
-function isOneOfEachPolygon($inputArray) {
+// function isOneOfEachPolygon($resultArray) {
+// 	$returnStr = "";
+// 	for ($i=0; $i < count($resultArray); $i++) { 
+// 		$returnStr .= "-";
+// 		for ($j=3; $j <= 8; $j++) { 
+// 			if (isPolygon($j,$resultArray[$i])) {
+// 				$returnStr .= "1";
+// 			} else {
+// 				$returnStr .= "0";
+// 			}
+// 		}
+// 		// if ($returnStr == "-000000") {
+// 		// 	return false;
+// 		// }
+// 		// echo $returnStr;
 
-	// for ($i=3; $i <= 8; $i++) { 
-	// 	if (isPolygon($i,$inputNum)) {
-	// 		return true;
-	// 	}
-	// }
-	// return false;
-}
+// 	}
+// 	if (strpos($returnStr,"100000")
+// 		&& strpos($returnStr,"010000")
+// 		&& strpos($returnStr,"001000")
+// 		&& strpos($returnStr,"000100")
+// 		&& strpos($returnStr,"000010")
+// 		&& strpos($returnStr,"000001")
+// 		// $returnStr == "-000000"
+// 		) {
+// 		// return false;
+// 		return true;
+
+// 	}
+// 	// echo $returnStr;
 
 
-
-
-
-
-for ($a=11; $a <= 99; $a++) {
-	for ($b=11; $b <= 99; $b++) {
-		if (isMultiplePolygon(intval($a.$b))) {
-			for ($c=11; $c <= 99; $c++) {
-				if (isMultiplePolygon(intval($b.$c))) {
-					for ($d=11; $d <= 99; $d++) {
-						if (isMultiplePolygon(intval($c.$d))) {
-							for ($e=11; $e <= 99; $e++) {
-								if (isMultiplePolygon(intval($d.$e))) {
-									for ($f=11; $f <= 99; $f++) {
-										if (isMultiplePolygon(intval($e.$f))
-											&& isMultiplePolygon(intval($f.$a))
-											) {
-										// if (isOneOfEachPolygon(array($a,$b,$c,$d,$e,$f))
-											// ) {
-											echo $a," ",$b," ",$c," ",$d," ",$e," ",$f,"\n";
+// 	// echo " => ";
+// 	return false;
+// 	// return true;
+// }
+function isOneOfEachPolygon($resultArray) {
+	foreach ($resultArray as $key0 => $value0) {
+		if (isPolygon(8,$value0)) {
+			unset($resultArray[$key0]);
+			foreach ($resultArray as $key1 => $value1) {
+				if (isPolygon(7,$value1)) {
+					unset($resultArray[$key1]);
+					foreach ($resultArray as $key2 => $value2) {
+						if (isPolygon(6,$value2)) {
+							unset($resultArray[$key2]);
+							foreach ($resultArray as $key3 => $value3) {
+								if (isPolygon(5,$value3)) {
+									unset($resultArray[$key3]);
+									foreach ($resultArray as $key4 => $value4) {
+										if (isPolygon(4,$value4)) {
+											unset($resultArray[$key4]);
+											foreach ($resultArray as $key5 => $value5) {
+												if (isPolygon(3,$value5)) {
+													return true;
+												}
+											}
 										}
 									}
 								}
@@ -74,7 +158,61 @@ for ($a=11; $a <= 99; $a++) {
 			}
 		}
 	}
-	// echo "A: ",$a,"\n";
+	return false;
+}
+
+
+// for ($a=11; $a <= 99; $a++) {
+// 	for ($b=11; $b <= 99; $b++) {
+// 		if (isMultiplePolygon(intval("".$a.$b))) {
+// 			for ($c=11; $c <= 99; $c++) {
+// 				if (isMultiplePolygon(intval("".$b.$c))
+// 					&& isMultiplePolygon(intval("".$c.$a))
+// 					) {
+// 					if (isOneOfEachPolygon(array($a.$b,$b.$c,$c.$a))
+//  						) {
+// 						echo $a," ",$b," ",$c,"\n";
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+
+
+
+
+
+for ($a=11; $a <= 99; $a++) {
+	for ($b=11; $b <= 99; $b++) {
+		if (isMultiplePolygon(intval("".$a.$b))) {
+			for ($c=11; $c <= 99; $c++) {
+				if (isMultiplePolygon(intval("".$b.$c))) {
+					for ($d=11; $d <= 99; $d++) {
+						if (isMultiplePolygon(intval("".$c.$d))) {
+							for ($e=11; $e <= 99; $e++) {
+								if (isMultiplePolygon(intval("".$d.$e))) {
+									for ($f=11; $f <= 99; $f++) {
+										if (isMultiplePolygon(intval("".$e.$f))
+											&& isMultiplePolygon(intval("".$f.$a))
+											) {
+											if (isOneOfEachPolygon(array($a.$b,$b.$c,$c.$d,$d.$e,$e.$f,$f.$a))
+												) {
+												echo $a," ",$b," ",$c," ",$d," ",$e," ",$f,"\n";
+												break 6;
+											}
+											// die();
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 
