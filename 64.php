@@ -23,29 +23,29 @@ How many continued fractions for N ≤ 10000 have an odd period?
 <?php $startTime = microtime(true);
 
 function numOfPeriods($input,$baseroot) {
-		$count = 0;
-		$m = 0;
-		$d = 1;
-		$a = $baseroot-1;
-		$aZero = $a;
-		$periodNum=0;
-		while (1==1) {
-			$m = ($d*$a)-$m;
-			$d = ($input-($m*$m))/$d;
-			$a = floor(($aZero+$m)/$d);
-			if ($periodNum==0) {
-				$mStart = $m;
-				$dStart = $d;
-				$aStart = $a;
-			}
-			else {
-				$count++;
-				if ($mStart == $m && $dStart == $d && $aStart == $a) {
-					return $count;
-				}
-			}
-			$periodNum++;
+	$count = 0;
+	$m = 0;
+	$d = 1;
+	$a = $baseroot-1;
+	$aZero = $a;
+	$periodNum=0;
+	while (1==1) {
+		$m = ($d*$a)-$m;
+		$d = ($input-($m*$m))/$d;
+		$a = floor(($aZero+$m)/$d);
+		if ($periodNum==0) {
+			$mStart = $m;
+			$dStart = $d;
+			$aStart = $a;
 		}
+		else {
+			$count++;
+			if ($mStart == $m && $dStart == $d && $aStart == $a) {
+				return $count;
+			}
+		}
+		$periodNum++;
+	}
 }
 $oddCount = 0;
 //$j is all numbers that aren't exact square numbers
@@ -60,6 +60,7 @@ for ($i=2; $i <= 100; $i++) {
 	}
 	$startNum = $endNum+1;
 }
+
 $answer = $oddCount;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
