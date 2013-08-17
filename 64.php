@@ -26,11 +26,35 @@ $startNum = 2;
 $endNum = 0;
 for ($i=2; $i <= 5; $i++) { 
 	$endNum = pow($i,2);
-	for ($j=$startNum; $j < $endNum; $j++) { 
-		echo $j,"\n";
+	for ($j=$startNum; $j < $endNum; $j++) {
+
+
+
+
+		echo $j," => ";
+
+		$m = 0;
+		$d = 1;
+		$a = $i-1;
+		$aZero = $i-1;
+
+
+		for ($k=0; $k < 10; $k++) { 
+			$m = ($d*$a)-$m;
+			$d = ($j-($m*$m))/$d;
+
+			$a = floor(($aZero+$m)/$d);
+			echo $a;
+		}
+
+
+		echo "\n";
+
+
 	}
 	$startNum = $endNum+1;
 }
+
 
 
 $answer = 0;
