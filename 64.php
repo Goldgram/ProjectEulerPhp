@@ -21,44 +21,47 @@ Exactly four continued fractions, for N ≤ 13, have an odd period.
 How many continued fractions for N ≤ 10000 have an odd period?
 -->
 <?php $startTime = microtime(true);
+
+function numOfPeriods($input,$baseroot) {
+		$count = 0;
+		$m = 0;
+		$d = 1;
+		$a = $baseroot-1;
+		$aZero = $a;
+		$periodNum=0;
+		while (1==1) {
+			$m = ($d*$a)-$m;
+			$d = ($input-($m*$m))/$d;
+			$a = floor(($aZero+$m)/$d);
+			if ($periodNum==0) {
+				$mStart = $m;
+				$dStart = $d;
+				$aStart = $a;
+			}
+			else {
+				$count++;
+				if ($mStart == $m && $dStart == $d && $aStart == $a) {
+					return $count;
+				}
+			}
+			$periodNum++;
+		}
+}
+$oddCount = 0;
 //$j is all numbers that aren't exact square numbers
 $startNum = 2;
 $endNum = 0;
-for ($i=2; $i <= 5; $i++) { 
+for ($i=2; $i <= 100; $i++) { 
 	$endNum = pow($i,2);
 	for ($j=$startNum; $j < $endNum; $j++) {
-
-
-
-
-		echo $j," => ";
-
-		$m = 0;
-		$d = 1;
-		$a = $i-1;
-		$aZero = $i-1;
-
-
-		for ($k=0; $k < 10; $k++) { 
-			$m = ($d*$a)-$m;
-			$d = ($j-($m*$m))/$d;
-
-			$a = floor(($aZero+$m)/$d);
-			echo $a;
+		if (numOfPeriods($j,$i)%2 != 0) {
+			$oddCount++;
 		}
-
-
-		echo "\n";
-
-
 	}
 	$startNum = $endNum+1;
 }
-
-
-
-$answer = 0;
+$answer = $oddCount;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 1322
+// Time: 0.15s
