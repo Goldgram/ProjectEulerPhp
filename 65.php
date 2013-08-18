@@ -18,48 +18,28 @@ Find the sum of digits in the numerator of the 100th convergent of the continued
 -->
 <?php $startTime = microtime(true);
 
-// 	echo pow(1+(1/$n),$n),"\n";
-// }
-// $top = 10000000000;
-// $e  = pow(1+(1/$top),$top);
-// echo $e,"\n";
-
-
-
-// $e = 2.71828182845904523536028747135266249775724709369995;
-
-// $m = 0;
-// $d = 1;
-// $a = $e-1;
-// $aZero = $a;
-// for ($periodNum=1; $periodNum <= 10; $periodNum++) { 
-// 	$m = ($d*$a)-$m;
-// 	$d = ($e-($m*$m))/$d;
-// 	$a = floor(($aZero+$m)/$d);
-// 	echo $periodNum," => ",$m," ",$d," ",$a,"\n";
-// }
-
-
-// for ($n=1; $n < 100; $n++) { 
-// 	// echo 4*((4*$n)-1),"\n";
-// 	// echo (4*$n)+1,"\n";
-// }}
-
-
-echo "e = [2; 1";
-for ($i=1; $i <= 10; $i++) { 
-	echo ",",2*$i;
-	echo ",1";
-	echo ",1";
+$e = array(2,1);
+$j = 1;
+for ($i=2; $i <= 100; $i+=3) {
+	$e[$i] = 2*$j;
+	$e[$i+1] = 1;
+	$e[$i+2] = 1;
+	$j++;
 }
-echo "\n";
+$num = "".$e[99];
+$den = "1";
+for ($j=98; $j >= 0; $j--) {
+	$startNum = $num;
+	$num = bcadd(bcmul($num,"".$e[$j]),$den);
+	$den = $startNum;
+}
+$digitSum = 0;
+for ($i=0; $i < strlen($num); $i++) { 
+	$digitSum += $num[$i];
+}
 
-
-
-
-
-$answer = 0;
+$answer = $digitSum;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 272
+// Time: 0.0007
