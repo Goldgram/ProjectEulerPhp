@@ -30,6 +30,7 @@ $num = "".$e[99];
 $den = "1";
 for ($j=98; $j >= 0; $j--) {
 	$startNum = $num;
+	//shifted around to get ((next*numerator)+denominator)/ numerator
 	$num = bcadd(bcmul($num,"".$e[$j]),$den);
 	$den = $startNum;
 }
