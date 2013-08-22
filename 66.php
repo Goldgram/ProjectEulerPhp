@@ -16,7 +16,6 @@ Find the value of D ≤ 1000 in minimal solutions of x for which the largest val
 
 $maxX = 0;
 $maxD = 0;
-
 //$D is all numbers that aren't exact square numbers
 $startNum = 2;
 $endNum = 0;
@@ -24,55 +23,39 @@ for ($baseroot=2; $baseroot <= 32; $baseroot++) {
 	$endNum = pow($baseroot,2);
 	for ($D=$startNum; $D < $endNum; $D++) {
 		if ($D <= 1000) {
-			
+	 		//solved using Continued fraction expansion
 	 		$m = 0;
 	    $d = 1;
 	    $a = $baseroot - 1;
-	    $aZero = $a;
-
-	    $numer0 = "1";
-	    $denom0 = "0";
-
+	    $aStart = $a;
+	    $numerLast = "1";
+	    $denomLast = "0";
 	    $numer = "".$a;
 	    $denom = "1";
-
-	   
-	    $periodNum=0;
-			while (($numer*$numer)-($D*$denom*$denom) != 1) {
+			$periodNum=0;
+			while (  bcsub(bcmul($numer,$numer),bcmul($D,bcmul($denom,$denom))) != "1") {
 	    	$m = ($d*$a)-$m;
 	    	$d = ($D-($m*$m))/$d;
-				$a = floor(($aZero+$m)/$d);
-
-				$numerCurrent = $numer0;
-        $numer0 = $numer;
-        
-        $denomCurrent = $denom0;
-        $denom0 = $denom;
- 
-        $numer = bcadd(bcmul($a,$numer0),$numerCurrent);
-        $denom = bcadd(bcmul($a,$denom0),$denomCurrent);
-
-
+				$a = floor(($aStart+$m)/$d);
+				$numerTemp = $numer;
+        $denomTemp = $denom;
+        // calculate the numerator and denominator while calculating the repeating block
+        $numer = bcadd(bcmul($a,$numer),$numerLast);
+        $denom = bcadd(bcmul($a,$denom),$denomLast);
+        $numerLast = $numerTemp;
+        $denomLast = $denomTemp;
 	    }
-	    echo $D," => ",$numer," / ",$denom,"\n";
 			if ($numer > $maxX) {
 				$maxX = $numer;
 				$maxD = $D;
 			}
-	
 		}
-		
 	}
 	$startNum = $endNum+1;
 }
 
-
-
-
-
-
 $answer = $maxD;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 661
+// Time: 0.165s
