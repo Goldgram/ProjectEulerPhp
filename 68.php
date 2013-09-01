@@ -16,136 +16,53 @@ Using the numbers 1 to 10, and depending on arrangements, it is possible to form
 -->
 <?php $startTime = microtime(true);
 
-// function getFactorial($inputNum)
-// {
-// 	$total = 1;
-// 	for ($i=$inputNum; $i > 1; $i--) { 
-// 		$total *= $i;
-// 	}
-// 	return $total;
-// }
-//setup the permutation index values for X digit permutation (X!)
-// $permutationNum = 10;
-// $perNumIMax = getFactorial($permutationNum);
-// for ($perNumI = 1; $perNumI <= $perNumIMax; $perNumI++) { 
-// 	$perNum = $perNumI;
-// 	$resultTemplate = "";
-// 	for ($numIndex=0; $numIndex < $permutationNum; $numIndex++) { 
-// 		$currentResult = 0;
-// 		$combsLeft = getFactorial($permutationNum - 1 - $numIndex);
-// 		for ($i=0; $i < ($permutationNum - $numIndex); $i++) { 
-// 			$upToPosib = $i * $combsLeft;
-// 			if ($upToPosib < $perNum) {
-// 				$currentUpToPosib = $upToPosib;
-// 				$currentResult = $i;
-// 			}
-// 		}
-// 		// $resultTemplate[$perNumI][$numIndex] = $currentResult;
-// 		$resultTemplate .= $currentResult;
-// 		$perNum -= $currentUpToPosib;
-// 	}
-// 	// echo $resultTemplate,"\n";
-// }
-// var_dump($resultTemplate);
+$resultsArray = array();
+$resultsArrayIndex = 0;
 
-// $finalResults = array();
-// $finalResultsIndex = 0;
-// $resultTemplateCount = count($resultTemplate);
-// for ($i=1; $i <= $resultTemplateCount; $i++) {
-// 	echo $i," => ";
-// 	for ($j=0; $j < $resultTemplateCount; $j++) { 
-// 		$nums[$j] = $j+1;
-// 	}
-// 	for ($j=0; $j < count($resultTemplate[$i]); $j++) { 
-// 		echo $nums[$resultTemplate[$i][$j]];
-// 		unset($nums[$resultTemplate[$i][$j]]);
-// 		$nums = array_values($nums);
-// 	}
-// 	echo "\n";
-// }
-
-
-
-
-
-// $a+$b+$c == $c+$d+$e == $b+$e+$f 
-// $upTo = 6;
-// for ($a=1; $a <= $upTo; $a++) {
-// 	for ($b=1; $b <= $upTo; $b++) {
-// 		for ($c=1; $c <= $upTo; $c++) {
-// 			if ($a+$b+$c == 10 
-// 				&& $a!=$b
-// 				&& $b!=$c
-// 				) {
-
-// 				for ($d=1; $d <= $upTo; $d++) {
-// 					for ($e=1; $e <= $upTo; $e++) {
-// 						if ($c+$d+$e == 10 
-// 							&& $c!=$d
-// 							&& $d!=$e
-// 							) {
-							
-// 							for ($f=1; $f <= $upTo; $f++) {
-// 								if ($b+$e+$f == 10 
-// 									&& $b!=$e
-// 									&& $e!=$f
-// 									) {
-// 									$letters = ".".$a.$b.$c.$d.$e.$f;
-// 									if (strpos($letters,"1")
-// 										&& strpos($letters,"2")
-// 										&& strpos($letters,"3")
-// 										&& strpos($letters,"4")
-// 										&& strpos($letters,"5")
-// 										&& strpos($letters,"6")
-// 										) {
-// 										echo $a,"+",$b,"+",$c," == ",$c,"+",$d,"+",$e," == ",$b,"+",$e,"+",$f,"\n";
-// 									}
-// 								}
-// 							}
-// 						}
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
-
-// function getFactorial($inputNum)
-// {
-// 	$total = 1;
-// 	for ($i=$inputNum; $i > 1; $i--) { 
-// 		$total *= $i;
-// 	}
-// 	return $total;
-// }
-// $nums = array("a","b","c","d");
-// // $numsCount = count($nums);
-// // $numberToPrint = $numsCount-1;
-// // echo $numberToPrint,"\n";
-// for ($i=0; $i < count($nums); $i++) { 
-// 	for ($j=0; $j < count($nums)-1; $j++) { 
-// 		echo  $nums[$i];
-
-// 		echo "\n";
-// 	}
-// }
-
-
-
-function addToAllIter($string,$attachment) {
-	for ($i=0; $i < strlen($string); $i++) { 
-		echo str_replace($string[$i], $string[$i].$attachment, $string),"\n";
+function allPermutations($string,$attachment,$endStrLen) {
+	global $resultsArray,$resultsArrayIndex;
+	for ($i=0; $i <= strlen($string); $i++) {
+		$tempStr = substr($string,0,$i).$attachment.substr($string,$i,strlen($string)-$i);
+		if ($attachment==$endStrLen) {
+			//echo $tempStr,"\n"; //this problem's code inside permutation function
+			$firstThree = $tempStr[0]+$tempStr[1]+$tempStr[2];
+			if ($firstThree == $tempStr[3]+$tempStr[2]+$tempStr[4]
+				&& $firstThree == $tempStr[5]+$tempStr[4]+$tempStr[6]
+				&& $firstThree == $tempStr[7]+$tempStr[6]+$tempStr[8]
+				&& $firstThree == $tempStr[9]+$tempStr[8]+$tempStr[1]
+				) {
+				$testStr = ($tempStr[0]+1).($tempStr[1]+1).($tempStr[2]+1).($tempStr[3]+1).($tempStr[2]+1).($tempStr[4]+1).($tempStr[5]+1).($tempStr[4]+1).($tempStr[6]+1).($tempStr[7]+1).($tempStr[6]+1).($tempStr[8]+1).($tempStr[9]+1).($tempStr[8]+1).($tempStr[1]+1);
+				if (strlen($testStr) == 16) {
+					$resultsArray[$resultsArrayIndex] = array($tempStr[0]+1,$tempStr[1]+1,$tempStr[2]+1,$tempStr[3]+1,$tempStr[2]+1,$tempStr[4]+1,$tempStr[5]+1,$tempStr[4]+1,$tempStr[6]+1,$tempStr[7]+1,$tempStr[6]+1,$tempStr[8]+1,$tempStr[9]+1,$tempStr[8]+1,$tempStr[1]+1);
+					$resultsArrayIndex++;
+				}
+			}
+		} else {
+			allPermutations($tempStr,$attachment+1,$endStrLen);
+		}
 	}
-	echo $attachment.$string,"\n";
-	
 }
-addToAllIter("0","1");
 
+allPermutations("0",1,9);
+$maxString = "0";
+foreach ($resultsArray as $result) {
+	$tempArray = array(0 => $result[0],3 => $result[3],6 => $result[6],9 => $result[9],12 => $result[12]);
+	asort($tempArray);
+	$startKey = key($tempArray);
+	$fullString = "";
+	for ($i=$startKey; $i < count($result); $i++) { 
+		$fullString .= $result[$i];
+	}
+	for ($i=0; $i < $startKey; $i++) { 
+		$fullString .= $result[$i];
+	}
+	if (bccomp($fullString,$maxString)>0) {
+		$maxString = $fullString;
+	}
+}
 
-
-$answer = 0;
+$answer = $maxString;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
-// Answer: 
-// Time: 
+// Answer: 6531031914842725
+// Time: 10.2s
