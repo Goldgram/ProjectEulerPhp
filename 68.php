@@ -24,11 +24,12 @@ Using the numbers 1 to 10, and depending on arrangements, it is possible to form
 // 	}
 // 	return $total;
 // }
-// //setup the permutation index values for X digit permutation (X!)
-// $permutationNum = 6;
+//setup the permutation index values for X digit permutation (X!)
+// $permutationNum = 10;
 // $perNumIMax = getFactorial($permutationNum);
 // for ($perNumI = 1; $perNumI <= $perNumIMax; $perNumI++) { 
 // 	$perNum = $perNumI;
+// 	$resultTemplate = "";
 // 	for ($numIndex=0; $numIndex < $permutationNum; $numIndex++) { 
 // 		$currentResult = 0;
 // 		$combsLeft = getFactorial($permutationNum - 1 - $numIndex);
@@ -39,10 +40,13 @@ Using the numbers 1 to 10, and depending on arrangements, it is possible to form
 // 				$currentResult = $i;
 // 			}
 // 		}
-// 		$resultTemplate[$perNumI][$numIndex] = $currentResult;
+// 		// $resultTemplate[$perNumI][$numIndex] = $currentResult;
+// 		$resultTemplate .= $currentResult;
 // 		$perNum -= $currentUpToPosib;
 // 	}
+// 	// echo $resultTemplate,"\n";
 // }
+// var_dump($resultTemplate);
 
 // $finalResults = array();
 // $finalResultsIndex = 0;
@@ -61,51 +65,82 @@ Using the numbers 1 to 10, and depending on arrangements, it is possible to form
 // }
 
 
+
+
+
 // $a+$b+$c == $c+$d+$e == $b+$e+$f 
-$upTo = 6;
-for ($a=1; $a <= $upTo; $a++) {
-	for ($b=1; $b <= $upTo; $b++) {
-		for ($c=1; $c <= $upTo; $c++) {
-			if ($a+$b+$c == 10 
-				&& $a!=$b
-				&& $b!=$c
-				) {
+// $upTo = 6;
+// for ($a=1; $a <= $upTo; $a++) {
+// 	for ($b=1; $b <= $upTo; $b++) {
+// 		for ($c=1; $c <= $upTo; $c++) {
+// 			if ($a+$b+$c == 10 
+// 				&& $a!=$b
+// 				&& $b!=$c
+// 				) {
 
-				for ($d=1; $d <= $upTo; $d++) {
-					for ($e=1; $e <= $upTo; $e++) {
-						if ($c+$d+$e == 10 
-							&& $c!=$d
-							&& $d!=$e
-							) {
+// 				for ($d=1; $d <= $upTo; $d++) {
+// 					for ($e=1; $e <= $upTo; $e++) {
+// 						if ($c+$d+$e == 10 
+// 							&& $c!=$d
+// 							&& $d!=$e
+// 							) {
 							
-							for ($f=1; $f <= $upTo; $f++) {
-								if ($b+$e+$f == 10 
-									&& $b!=$e
-									&& $e!=$f
-									) {
-									$letters = ".".$a.$b.$c.$d.$e.$f;
-									if (strpos($letters,"1")
-										&& strpos($letters,"2")
-										&& strpos($letters,"3")
-										&& strpos($letters,"4")
-										&& strpos($letters,"5")
-										&& strpos($letters,"6")
-										) {
-										echo $a,"+",$b,"+",$c," == ",$c,"+",$d,"+",$e," == ",$b,"+",$e,"+",$f,"\n";
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+// 							for ($f=1; $f <= $upTo; $f++) {
+// 								if ($b+$e+$f == 10 
+// 									&& $b!=$e
+// 									&& $e!=$f
+// 									) {
+// 									$letters = ".".$a.$b.$c.$d.$e.$f;
+// 									if (strpos($letters,"1")
+// 										&& strpos($letters,"2")
+// 										&& strpos($letters,"3")
+// 										&& strpos($letters,"4")
+// 										&& strpos($letters,"5")
+// 										&& strpos($letters,"6")
+// 										) {
+// 										echo $a,"+",$b,"+",$c," == ",$c,"+",$d,"+",$e," == ",$b,"+",$e,"+",$f,"\n";
+// 									}
+// 								}
+// 							}
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+
+// function getFactorial($inputNum)
+// {
+// 	$total = 1;
+// 	for ($i=$inputNum; $i > 1; $i--) { 
+// 		$total *= $i;
+// 	}
+// 	return $total;
+// }
+// $nums = array("a","b","c","d");
+// // $numsCount = count($nums);
+// // $numberToPrint = $numsCount-1;
+// // echo $numberToPrint,"\n";
+// for ($i=0; $i < count($nums); $i++) { 
+// 	for ($j=0; $j < count($nums)-1; $j++) { 
+// 		echo  $nums[$i];
+
+// 		echo "\n";
+// 	}
+// }
+
+
+
+function addToAllIter($string,$attachment) {
+	for ($i=0; $i < strlen($string); $i++) { 
+		echo str_replace($string[$i], $string[$i].$attachment, $string),"\n";
 	}
+	echo $attachment.$string,"\n";
+	
 }
-
-
-
-
+addToAllIter("0","1");
 
 
 
