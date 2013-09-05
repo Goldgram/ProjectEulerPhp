@@ -16,39 +16,52 @@ function isPrime($input) {
 //set up array of primes up to needed
 $primeArray = array();
 $primeArray[0] = 2;
-$primeArrayIndex = 1;
-for ($num=3; $num < 1000; $num+=2) { 
+// for ($num=3; $num < 1000; $num+=2) {
+$num=3;
+while (end($primeArray)<1000) {
 	if (isPrime($num))
 	{
-		$primeArray[$primeArrayIndex] = $num;
-		$primeArrayIndex++;
+		$primeArray[] = $num;
 	}
+	$num+=2;
 }
 
 function getTotient($input) {
 	global $primeArray;
-	$minusCount = 1;
+	$factorsArray = array();
 	$sq = sqrt($input);
 	for($i=0; $primeArray[$i] <= $sq; $i++) {
-		if($input%$primeArray[$i]==0) {
-			$minusCount+=(($input/$primeArray[$i])-1);
+		$primeFactor = $primeArray[$i];
+		if($input%$primeFactor==0) {
+			$factorsArray[] = $primeFactor;
+			// echo $primeFactor,",";
+			// $minusCount+=(($input/$primeFactor)-1);
 
-			$otherFactor = $input/$primeArray[$i];
-			if ($otherFactor%$primeArray[$i]!=0) {
-				$minusCount+=($primeArray[$i]-1);
+			$otherFactor = $input/$primeFactor;
+			if (isPrime($otherFactor) && $otherFactor%$primeFactor!=0) {
+				$factorsArray[] = $otherFactor;
+				// echo $otherFactor,",";
+				// $minusCount+=($primeFactor-1);
 			}
 		}
 	}
-	return $input - $minusCount;
+	$minusCount = 1;
+
+
+// var_dump($factorsArray);
+//calculate the real minus count...???
+
+
+	return " Tot:".($input - $minusCount);
+
+
 }
 
 
-for ($num=2; $num <= 100; $num++) { 
-
-	//results are incorrect somewhere after 10
+for ($num=2; $num <= 1000000; $num++) { 
 
 	echo $num," => ",getTotient($num),"\n";
-	// $var = ($num - getTotient($num));
+
 	// if ($num%1000==0) {
 	// 	echo $num,"\n";
 	// }
