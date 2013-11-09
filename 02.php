@@ -7,9 +7,8 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 
 $a = 1;
 $b = 2;
-$total = 0;
 while ($a <= 4000000) {
-	if ($a%2==0) { $total += $a; }
+	$total+= $a%2==0 ? $a : 0;
 	$b = $a + $b;
 	$a = $b - $a;
 }
