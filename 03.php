@@ -3,59 +3,38 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
  -->
 <?php $startTime = microtime(true);
-//large number prime varifier
-function isPrime($input)
-{
-	$coin = 1;
+//is prime checker
+function isPrime($input) {
 	$sq = sqrt($input);
-	for ($i=2; $i <= $sq ; $i++) {
-		if (fmod($input, $i)==0) {
-			$coin--;
-			break;
+	for($i=2; $i <= $sq; $i++) {
+		if($input%$i==0) {
+			return false;
 		}
 	}
-	return $coin;
+	return true;
 }
-
-$div = 1;
-$bigNum = 600851475143;
-$bigNumStr = '600851475143';
-$numbers = array();
-$arrayIndex = 0;
-
-//loop to house all the lower half of factors in a array (called numbers)
-while (($bigNum/$div)>=$div) {
+//checks if prime and highest and sets if so. 
+function checkIfHighestAndPrime($input) {
+	global $HighestPrime;
+	if (isPrime($input) && $input>$HighestPrime) {
+		$HighestPrime = $input;
+	}
+}
+$div = 2;
+$num = 600851475143;
+//sqrt num now to save on computation
+$sqrtOfNum = sqrt($num);
+//loop and check both factors up to sqrt
+while ($div <= $sqrtOfNum) {
+	if ($num%$div==0) {
+		checkIfHighestAndPrime($div);
+		checkIfHighestAndPrime($num/$div);
+	}
 	$div++;
-	$divStr = ''+$div;
-	if (bcmod($bigNumStr, $divStr)==0) {
-		$numbers[$arrayIndex] = $div;
-		$arrayIndex++;
-	}
 }
 
-//check the top half of factors
-$foundInTopHalf = 0;
-for ($i=0; $i < count($numbers); $i++) { 
-	if (isPrime($bigNum/$numbers[$i])==1)
-	{
-		$HighestPrime = $bigNum/$numbers[$i];
-		$foundInTopHalf++;
-		break;
-	}
-}
-//if not there check the bottom half
-if ($foundInTopHalf==0) {
-	for ($i=count($numbers)-1; $i >= 0; $i--) { 
-		if (isPrime($numbers[$i])==1)
-		{
-			$HighestPrime = $numbers[$i];
-			break;
-		}
-	}
-}
-
-$answer = $numbers[$i];
+$answer = $HighestPrime;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 6857
-// Time: 2.5658s
+// Time: 0.03s

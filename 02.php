@@ -7,8 +7,11 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 
 $a = 1;
 $b = 2;
+//loop without using a temp variable
 while ($a <= 4000000) {
-	$total+= $a%2==0 ? $a : 0;
+	if($a%2==0) {
+		$total+=$a;
+	}
 	$b = $a + $b;
 	$a = $b - $a;
 }
@@ -17,4 +20,4 @@ $answer = $total;
 $endTime = microtime(true);
 echo "Answer: ",$answer,"\nTime: ",($endTime - $startTime),"\n";
 // Answer: 4613732
-// Time:  0.00001s
+// Time:  0.00002s
